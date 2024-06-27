@@ -1,0 +1,21 @@
+$primary-lingh-color: #FFF;
+$secondary-lingh-color: #fdfeff;
+
+$primary-color-gray: #242424;
+$primary-dark-color: #000;
+
+$secondary-colors: #012d5a;
+$tertiary-colors: #E52D27, #BF171D;
+
+
+// Breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1440px,
+);
+
+$font-family: 'Gantari';

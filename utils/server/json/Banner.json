@@ -1,0 +1,30 @@
+[
+  {
+    "bannerDesktop": "/img/poster/a-grande-fuga-desktop.png",
+    "bannerMobile": "/img/poster/a-grande-fuga-mobile.png",
+    "slug": "/agrandefuga",
+    "title": "A GRANDE FUGA",
+    "id": 0
+  },
+  {
+    "bannerDesktop": "/img/poster/entrevista-com-o-demonio-dektop.png",
+    "bannerMobile": "/img/poster/entrevista-com-o-demonio-mobile.png",
+    "slug": "/entrevistacomodemonio",
+    "title": "ENTREVISTA COM O DEMONIO",
+    "id": 1
+  },
+  {
+    "bannerDesktop": "/img/poster/ImaculadaDesktop.png",
+    "bannerMobile": "/img/poster/ImaculadaMobile.png",
+    "slug": "/imaculada",
+    "title": "IMACULADA",
+    "id": 2
+  },
+  {
+    "bannerDesktop": "/img/poster/AssassinoPorAcasoDesktop.png",
+    "bannerMobile": "/img/poster/AssassinoPorAcasoMobile.png",
+    "slug": "/assassinoporacaso",
+    "title": "ASSASSINO POR ACASO",
+    "id": 3
+  }
+]

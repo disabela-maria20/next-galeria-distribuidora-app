@@ -1,0 +1,141 @@
+.footer {
+  background-color: $primary-color-gray;
+  color: $primary-lingh-color;
+  padding: 20px 0;
+  margin-top: 35px;
+  @include media(lg){
+    padding: 0;
+    margin-top: 90px;
+  }
+  .areaGridFooter {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    grid-column-gap: 30px;
+    grid-row-gap: 20px;
+  
+    align-items: center;
+
+
+    @include media(xl) {
+      grid-template-columns: repeat(5, auto);
+      grid-template-rows: initial;
+      gap: 40px;
+    }
+
+    .areaLogo {
+      grid-area: 1 / 1 / 2 / 2;
+
+      @include media(xl) {
+        grid-area: initial;
+      }
+
+      img {
+        width: 100px;
+      }
+    }
+
+    .areaCopy {
+      grid-area: 2 / 1 / 3 / 4;
+      display: block;
+      text-align: center;
+      @include media(xl) {
+        grid-area: initial;
+      }
+
+
+      font-size: 1.2rem;
+
+      @include media(xl) {
+        text-align: left;
+      }
+
+      h3,
+      p {
+        padding: 2px;
+        display: inline;
+
+        @include media(xl) {
+          display: block;
+        }
+      }
+    }
+
+    .areaMapaSite {
+      grid-area: 1 / 2 / 2 / 4;
+
+      @include media(xl) {
+        grid-area: initial;
+      }
+
+      h3 {
+        display: none;
+      }
+
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+
+        li {
+
+          a {
+            text-transform: capitalize;
+            font-size: 1.2rem;
+            color: $primary-lingh-color;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .areaRedesSociais {
+      display: none;
+
+      @include media(xl) {
+        display: block;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      ul {
+        margin-top: 10px;
+        display: flex;
+        gap: 5px;
+
+        li {
+          a {
+            color: $primary-lingh-color;
+          }
+        }
+      }
+    }
+
+    .areaFiliais {
+      display: none;
+
+      @include media(xl) {
+        display: block;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      ul {
+        margin-top: 10px;
+        display: flex;
+        gap: 5px;
+
+        li {
+          a {
+            color: $primary-lingh-color;
+          }
+        }
+      }
+    }
+  }
+
+}

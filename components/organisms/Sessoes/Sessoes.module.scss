@@ -1,0 +1,205 @@
+.areaSessao {
+	background-color: var(--my-cool-background);
+
+	.gridSessoes {
+		@include media(lg) {
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+			grid-auto-rows: 550px;
+		}
+
+		.SessoesPoster {
+			display: none;
+			object-fit: contain;
+			object-position: right;
+			height: 100%;
+
+			@include media(lg) {
+				display: block;
+			}
+		}
+	}
+
+	.areaSessao {
+		display: block;
+		padding: 5px 20px;
+		font-size: 1.1rem;
+		color: $primary-lingh-color;
+		background-color: #6B6B6B;
+	}
+
+	ul {
+		background: $primary-lingh-color;
+	}
+}
+
+
+
+.areaPesquisa {
+	padding: 15px;
+
+	.flexAreaPesquisa {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		padding: 0 5px;
+		@include media(lg) {
+			padding: 0 20px;
+
+		}
+		background-color: $primary-lingh-color;
+		// position: relative;
+		// top: -25px;
+
+		input, select {
+			width: 100%;
+			@include inputNewsletter;
+
+			color: $primary-dark-color;
+		}
+
+		svg {
+			font-size: 5rem;
+			padding-left: 15px;
+		}
+	}
+
+	.flexData {
+		display: flex;
+		padding: 20px;
+		gap: 10px;
+		overflow: auto;
+
+		.areaData {
+			padding: 5px 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 5px;
+			background: $primary-lingh-color;
+			border-radius: 10px;
+
+			.mes {
+				text-transform: capitalize;
+				font-size: 1.2rem;
+			}
+
+			.dia {
+				font-weight: 700;
+				font-size: 1.9rem;
+			}
+
+			.diaSemana {
+				text-transform: capitalize;
+				font-size: 1.2rem;
+			}
+
+			.selected {}
+		}
+	}
+}
+
+.areaCinema {
+	background-color: $primary-lingh-color;
+	padding: 20px;
+	height: 500px;
+	overflow: auto;
+
+	@include media(lg) {
+		height: 65%;
+	}
+
+	.flexTitle {
+		display: grid;
+		grid-template-columns: .2fr 1fr;
+		gap: 15px;
+		padding-bottom: 20px;
+		align-items: center;
+
+		img {
+			border-radius: 5px;
+			border: 1px solid $primary-dark-color;
+			width: 50px;
+			height: 50px;
+			padding: 5px;
+			object-fit: contain;
+			margin: auto;
+
+		}
+
+		.areaTitle {
+			position: relative;
+			overflow: hidden;
+
+			.flexTitleName {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+			}
+
+			h3 {
+				font-size: 1.8rem;
+				overflow: hidden;
+				margin-bottom: 5px;
+			}
+
+			h4 {
+				color: $primary-color-gray;
+				font-weight: 400;
+				font-size: 1rem;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+		}
+
+	}
+
+	.areaSalaHorario {
+		display: grid;
+		grid-template-columns: .2fr 1fr;
+		gap: 15px;
+		padding-bottom: 20px;
+		align-items: center;
+
+		span {
+			text-align: center;
+			font-size: 1.8rem;
+			font-weight: 700;
+		}
+
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			grid-gap: 15px;
+			grid-row-gap: 40px;
+			margin-top: 15px;
+		}
+	}
+}
+
+.ItemSessao {
+	border-bottom: 1px solid $primary-color-gray;
+	padding: 20px 0;
+}
+
+.areaDistancia {
+	color: $primary-dark-color;
+	margin-right: 5px;
+
+	span {
+		margin: 0 5px;
+	}
+}
+
+.sessoesVazio{
+	height: calc(100% - 70px);
+
+	p{
+		font-size: 1.6rem;
+		line-height: 2.6rem;
+		margin: 20px 0;
+		text-align: center;
+		padding: 15px 0;
+	}
+}

@@ -1,0 +1,8 @@
+export { default as Title } from './title'
+export { default as Nav } from './Nav'
+export { default as Logo } from './Logo'
+export { default as Burger } from './Burger'
+export { default as Search } from './Search'
+export { default as RedesSociais } from './RedesSociais'
+export { default as NavLink } from './NavLink'
+export { default as Loading } from './Loading'

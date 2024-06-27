@@ -1,0 +1,13 @@
+.title{
+  color: $primary-color-gray;
+  font-weight: 900;
+  font-family: $font-family;
+  text-transform: uppercase;
+  font-size: 31px;
+  text-align: center;
+    
+  @include media(lg){
+    font-size: 38px;
+    
+  }
+}
