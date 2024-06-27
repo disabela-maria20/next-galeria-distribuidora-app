@@ -61,21 +61,23 @@ const SobreNos = ({ listaFilmes }: ISobreNosProps) => {
           da Galeria, que atua em parceria com as maiores produtoras do país,
           desde o início de cada projeto. Focada em conteúdos comerciais e com
           grande apelo junto ao público, a empresa apresenta em seu catálogo
-          filmes como ‘Detetive Madeinusa’, comédia com fenômenos do humor
-          liderada pelo humorista Tirullipa e ‘Papai é Pop’, filme inspirado no
-          livro homônimo de Marcos Piangers, estrelado por Lázaro Ramos ao lado
-          de Paolla Oliveira. Os próximos lançamentos da Galeria Distribuidora
-          são: ‘Vovó Ninja’, filme para toda a família com direção de Bruno
-          Barreto e protagonizado por Gloria Pires; ‘Fazendo Meu Filme’,
-          estrelado por Bela Fernandes; ‘Meninas Não Choram’ com Letícia Braga e
-          Duda Matte; ‘Partiu América’ protagonizado por Matheus Ceará; ‘Doce
-          Família’ com Mariana Xavier e Viih Tube; e ‘Mãe Fora da Caixa’ com Miá
-          Mello. A Galeria Distribuidora é coprodutora e distribuidora de um
-          case inédito no mercado cinematográfico local: ‘A Meninas Que Matou Os
-          Pais e O Menino Que Matou Meus Pais’, dois longas com pontos de vista
+          filmes como &lsquo;Detetive Madeinusa&#x2019;, comédia com fenômenos
+          do humor liderada pelo humorista Tirullipa e &lsquo;Papai é
+          Pop&#x2019;, filme inspirado no livro homônimo de Marcos Piangers,
+          estrelado por Lázaro Ramos ao lado de Paolla Oliveira. Os próximos
+          lançamentos da Galeria Distribuidora são: &lsquo;Vovó Ninja&#x2019;,
+          filme para toda a família com direção de Bruno Barreto e protagonizado
+          por Gloria Pires; &lsquo;Fazendo Meu Filme&#x2019;, estrelado por Bela
+          Fernandes; &lsquo;Meninas Não Choram&#x2019; com Letícia Braga e Duda
+          Matte; &lsquo;Partiu América&#x2019; protagonizado por Matheus Ceará;
+          &lsquo;Doce Família&#x2019; com Mariana Xavier e Viih Tube; e
+          &lsquo;Mãe Fora da Caixa&#x2019; com Miá Mello. A Galeria
+          Distribuidora é coprodutora e distribuidora de um case inédito no
+          mercado cinematográfico local: &lsquo;A Meninas Que Matou Os Pais e O
+          Menino Que Matou Meus Pais&#x2019;, dois longas com pontos de vista
           diferentes sobre o caso von Richthofen. A trilogia sobre um dos crimes
-          que mais chocou o Brasil foi concluída com o lançamento de ‘A Menina
-          Que Matou Os Pais – A Confissão’.
+          que mais chocou o Brasil foi concluída com o lançamento de &lsquo;A
+          Menina Que Matou Os Pais – A Confissão&#x2019;.
         </p>
 
         <hr />
