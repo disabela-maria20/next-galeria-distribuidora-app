@@ -143,7 +143,8 @@ const Contato = () => {
                   <div className={Style.areaLabel}>
                     <label className={Style.aceite}>
                       <input type="checkbox" {...register('c_termos')} />
-                      Aceito receber as novidades da Galeria Distribuidora Brasil
+                      Aceito receber as novidades da Galeria Distribuidora
+                      Brasil
                     </label>
                     {errors.c_termos && (
                       <small className="text-error">
