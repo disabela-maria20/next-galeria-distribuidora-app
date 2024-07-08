@@ -123,3 +123,15 @@ export interface Location {
   state: string
   cities: string[]
 }
+
+export interface Banner {
+  bannerDesktop: string
+  bannerMobile: string
+  slug: string
+  title: string
+  id: number
+}
+
+export interface BannersResponse {
+  banners: Banner[]
+}
