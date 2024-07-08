@@ -26,7 +26,7 @@ interface IFilmeProps {
 
 enum EStreaming {
   Netflix = 'Netflix',
-  AmazonPrime = 'Amazon Prime',
+  AmazonPrime = 'Amazon Prime Video',
   DisneyPlus = 'Disney+',
   Hulu = 'Hulu',
   HBO = 'HBO',
