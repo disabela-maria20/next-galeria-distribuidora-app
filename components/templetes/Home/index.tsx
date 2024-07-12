@@ -72,8 +72,7 @@ const Home = ({ banner, listaFilmes }: IHomeProps) => {
     slidesPerView: 2,
     pagination: false,
     spaceBetween: 20,
-    //navigation: isMobile ? false : true,
-    navigation: false,
+    navigation: isMobile ? false : true,
     modules: [Navigation, Pagination],
     breakpoints: {
       640: {
@@ -104,7 +103,7 @@ const Home = ({ banner, listaFilmes }: IHomeProps) => {
 
   useEffect(() => {
     const pageView = () => {
-      dataLayerHome('Galeria Distribuidora', '')
+      dataLayerHome('Diamond Films', '')
     }
     pageView()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -124,10 +123,7 @@ const Home = ({ banner, listaFilmes }: IHomeProps) => {
         className={Style.slideBanner}
       >
         {banner?.map((data) => (
-          // <Link href={data.slug} key={data.id}>
-          //   <img src={isMobile ? data.bannerMobile : data?.bannerDesktop} onClick={} />
-          // </Link>
-          <span key={data.id} aria-label="banner">
+          <div className={Style.areaBanner} key={data.id} aria-label="banner">
             <LazyLoadImage
               effect="blur"
               alt="banner"
@@ -135,7 +131,12 @@ const Home = ({ banner, listaFilmes }: IHomeProps) => {
               src={isMobile ? data.bannerMobile : data?.bannerDesktop}
               onClick={() => handleClickBanner(data)}
             />
-          </span>
+            <div className="container">
+              <span className={Style.title} style={{ color: data.color }}>
+                {data.title}
+              </span>
+            </div>
+          </div>
         ))}
       </Slide.Content>
       <div className="container">
