@@ -24,15 +24,6 @@ interface IFilmeProps {
   }
 }
 
-enum EStreaming {
-  Netflix = 'Netflix',
-  AmazonPrime = 'Amazon Prime Video',
-  DisneyPlus = 'Disney+',
-  Hulu = 'Hulu',
-  HBO = 'HBO',
-  AppleTVPlus = 'Apple TV+'
-}
-
 enum EStatus {
   LANCAMENTO = 'lançamento',
   STREAMING = 'streaming',
@@ -56,24 +47,6 @@ function setDefinirCorClassificacaoIndicativa(idade: string) {
   return classificacao ? classificacao.cor : ''
 }
 
-const setStreaming = (streaming: string[]): string[] => {
-  const availableStreamings: string[] = []
-  const enumKeys = Object.keys(EStreaming)
-
-  streaming?.forEach((stream: string) => {
-    const matchingKey = enumKeys.find(
-      (key) =>
-        EStreaming[key as keyof typeof EStreaming].toLowerCase() ===
-        stream.toLowerCase()
-    )
-    if (matchingKey) {
-      availableStreamings.push(matchingKey)
-    }
-  })
-
-  return availableStreamings
-}
-
 function converterParaHorasEMinutos(totalMinutos: number) {
   const horas = Math.floor(totalMinutos / 60)
   const minutos = totalMinutos % 60
@@ -83,6 +56,8 @@ function converterParaHorasEMinutos(totalMinutos: number) {
 
 const Filme = (data: IFilmeProps) => {
   const filme = data.movie?.movie
+
+  //const streaming = filme.streaming.map((data) => data.platform).join(',')
   const isStreaming = filme.status == EStatus.STREAMING
 
   const [open, setOpen] = useState<boolean>(false)
@@ -100,7 +75,6 @@ const Filme = (data: IFilmeProps) => {
     formatMesmaSemana(filme?.releasedate) ||
     formatPassouUmaSemanaDesdeData(filme?.releasedate) ||
     filme?.hasSession
-  const streaming = setStreaming(filme?.streaming)
 
   const { formatarData } = useFormatarData()
   const { dataLayerFichafilme, dataLayerPlayTrailer, dataLayerMovieStream } =
@@ -222,7 +196,7 @@ const Filme = (data: IFilmeProps) => {
                   {formatarData(filme.releasedate)}
                 </h2>
                 <div className={Style.areaBtnCompra}>
-                  {emExibicao && !isMobile && !isStreaming && (
+                  {!isStreaming && emExibicao && !isMobile && (
                     <button
                       onClick={() => {
                         router.push('#sessao', { scroll: true })
@@ -231,7 +205,7 @@ const Filme = (data: IFilmeProps) => {
                       COMPRAR INGRESSOS
                     </button>
                   )}
-                  {streaming.length > 0 && !isMobile && (
+                  {filme.streaming.length > 0 && !isMobile && (
                     <button
                       onClick={() => {
                         dataLayerMovieStream(
@@ -242,6 +216,7 @@ const Filme = (data: IFilmeProps) => {
                           filme.streaming.toString(),
                           Number(filme.idVibezzMovie)
                         )
+                        window.location.href = ' https://www.primevideo.com/'
                       }}
                     >
                       ASSISTA AGORA NO
@@ -293,7 +268,7 @@ const Filme = (data: IFilmeProps) => {
               </button>
             </div>
           )}
-          {streaming.length > 0 && isMobile && (
+          {filme.streaming.length > 0 && isMobile && (
             <button
               onClick={() => {
                 dataLayerMovieStream(
