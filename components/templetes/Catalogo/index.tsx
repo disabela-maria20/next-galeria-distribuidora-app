@@ -1,10 +1,10 @@
 'use client'
-import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { IoSearchSharp } from 'react-icons/io5'
 
 import Style from './Catalogo.module.scss'
 
+import { CardFilme } from '@/components/molecules'
 import { useFormatarData } from '@/utils/hooks/useFormatarData/formatarData'
 import { useGtag } from '@/utils/lib/gtag'
 import { IFilmeResponse } from '@/utils/server/types'
@@ -30,9 +30,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
 
   const concatFilmes = lancamento.concat(streaming)
 
-  const { dataLayerMovieSelect, dataLayerMovieFilter } = useGtag()
-
-  const router = useRouter()
+  const { dataLayerMovieFilter } = useGtag()
 
   const handleGeneroChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     // setFiltroAno('')
@@ -178,26 +176,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
                 )
                 .map((data) => (
                   <div key={data.id}>
-                    <span
-                      onClick={() => {
-                        router.push(`/${data.slug}`)
-                        dataLayerMovieSelect(
-                          data.title,
-                          data.slug,
-                          data.originalTitle,
-                          data.genre,
-                          Number(data.idVibezzMovie)
-                        )
-                      }}
-                    >
-                      <img
-                        src={data.cover}
-                        alt={data.title}
-                        width={700}
-                        height={320}
-                      />
-                      <h2>{data.title}</h2>
-                    </span>
+                    <CardFilme data={data} slide="catalogo" />
                   </div>
                 ))}
             </div>

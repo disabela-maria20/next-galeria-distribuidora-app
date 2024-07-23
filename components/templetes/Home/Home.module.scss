@@ -136,14 +136,16 @@
 		.title {
 			position: absolute;
 			bottom: 0;
+			left: 0;
 			margin: 25px 0;
 			font-weight: 700;
 			font-size: 4.5rem;
 			text-align: center;
-
+			text-shadow: 2px 2px 4px #1b1b1b81, 2px -1px 4px #18181860;
 			@include media(lg) {
 				font-size: 5.5rem;
 				text-align: left;
+				left: initial;
 			}
 		}
 	}

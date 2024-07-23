@@ -4,6 +4,7 @@
 import { useRouter } from 'next/navigation'
 import { useLayoutEffect, useState } from 'react'
 import { FaInstagram, FaYoutube } from 'react-icons/fa'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import Style from './Filme.module.scss'
@@ -17,6 +18,7 @@ import useIsMobile from '@/utils/hooks/useIsMobile/isMobile'
 import { useGtag } from '@/utils/lib/gtag'
 import { IFilmeResponse, IFilmeResponseUrl } from '@/utils/server/types'
 import { SwiperOptions } from 'swiper/types'
+
 import 'react-lazy-load-image-component/src/effects/blur.css'
 interface IFilmeProps {
   movie: {
@@ -60,12 +62,23 @@ const Filme = (data: IFilmeProps) => {
   //const streaming = filme.streaming.map((data) => data.platform).join(',')
   const isStreaming = filme.status == EStatus.STREAMING
 
+  const [imageIndex, setImageIndex] = useState<number>(0)
   const [open, setOpen] = useState<boolean>(false)
   const [iframe, setIframe] = useState<string>()
   const [openModal, setOpenModal] = useState<boolean>(false)
-  const [image, setImage] = useState<IFilmeResponseUrl>()
   const [saibaMais, setSaibaMais] = useState<boolean>(!filme.hasSession)
 
+  const handlePrevImage = () => {
+    setImageIndex((prevIndex) =>
+      prevIndex === 0 ? filme.images.length - 1 : prevIndex - 1
+    )
+  }
+
+  const handleNextImage = () => {
+    setImageIndex((prevIndex) =>
+      prevIndex === filme.images.length - 1 ? 0 : prevIndex + 1
+    )
+  }
   const { formatMesmaSemana, formatPassouUmaSemanaDesdeData } =
     useFormatarData()
 
@@ -94,9 +107,9 @@ const Filme = (data: IFilmeProps) => {
     pageFichafilme()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  function handleVerImagem(data: IFilmeResponseUrl) {
+  function handleVerImagem(data: IFilmeResponseUrl, index: number) {
     setOpen(true)
-    setImage(data)
+    setImageIndex(index)
   }
 
   function handleVerVideo(data: string) {
@@ -389,14 +402,14 @@ const Filme = (data: IFilmeProps) => {
                 swiperOptions={swiperOptions}
                 className={Style.areaSlide}
               >
-                {filme?.images?.map((data) => (
+                {filme?.images?.map((data, i) => (
                   <div key={data.url}>
                     <LazyLoadImage
                       effect="blur"
                       alt="Filme"
                       className={Style.SlideImgFilme}
                       src={`${data.url}`}
-                      onClick={() => handleVerImagem(data)}
+                      onClick={() => handleVerImagem(data, i)}
                       style={{ cursor: 'pointer' }}
                       width={300}
                       height={200}
@@ -434,12 +447,20 @@ const Filme = (data: IFilmeProps) => {
               >
                 <LazyLoadImage
                   effect="blur"
-                  src={image?.url}
+                  src={filme.images[imageIndex]?.url}
                   className={Style.modalSlideImg}
                   alt="Imagem filmes"
                   width={700}
                   height={500}
                 />
+                <div className={Style.btnSlideImagem}>
+                  <button onClick={handlePrevImage}>
+                    <FiChevronLeft />
+                  </button>
+                  <button onClick={handleNextImage}>
+                    <FiChevronRight />
+                  </button>
+                </div>
               </Model.Body>
             </Model.Root>
           )}

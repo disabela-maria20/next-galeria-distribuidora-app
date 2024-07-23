@@ -1,6 +1,10 @@
 .catalogo {
 	color: $primary-lingh-color;
-
+	margin-bottom: 35px;
+  @include media(lg){
+    padding: 0;
+    margin-bottom: 90px;
+  }
 	h1 {
 		font-size: 3.5rem;
 		padding-top: 130px;
@@ -18,7 +22,7 @@
 		flex-direction: column;
 		margin: 45px 0;
 		position: relative;
-
+		
 		@include media(lg) {
 			align-items: flex-end;
 			justify-content: space-between;
