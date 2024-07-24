@@ -22,9 +22,12 @@ import { SwiperOptions } from 'swiper/types'
 
 interface IHomeProps {
   banner: Array<any>
-  listaFilmes: {
+  listaFilmes?: {
     releases: Array<IFilmeResponse>
     streaming: Array<IFilmeResponse>
+    coming_soon: Array<IFilmeResponse>
+    in_production: Array<IFilmeResponse>
+    post_production: Array<IFilmeResponse>
   }
 }
 
