@@ -35,7 +35,7 @@ enum Status {
   INATIVO = 'inativo',
   PRODUCAO = 'producao',
   POSPRODUCAO = 'pos-producao',
-  EMBREVE = 'embreve'
+  EMBREVE = 'em-breve'
 }
 
 const statusCorrecoes: Record<Status, string> = {
