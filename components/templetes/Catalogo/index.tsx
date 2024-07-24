@@ -4,15 +4,19 @@ import { IoSearchSharp } from 'react-icons/io5'
 
 import Style from './Catalogo.module.scss'
 
+import { Loading } from '@/components/atoms'
 import { CardFilme } from '@/components/molecules'
 import { useFormatarData } from '@/utils/hooks/useFormatarData/formatarData'
 import { useGtag } from '@/utils/lib/gtag'
 import { IFilmeResponse } from '@/utils/server/types'
 
 interface ICatalogoProps {
-  listaFilmes: {
+  listaFilmes?: {
     releases: Array<IFilmeResponse>
     streaming: Array<IFilmeResponse>
+    coming_soon: Array<IFilmeResponse>
+    in_production: Array<IFilmeResponse>
+    post_production: Array<IFilmeResponse>
   }
 }
 
@@ -24,11 +28,12 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
   const [filtroPesquisa, setFiltroPesquisa] = useState<IFilmeResponse[]>([])
   const { formatAno } = useFormatarData()
 
-  const lancamento = listaFilmes.releases
-
-  const streaming = listaFilmes.streaming
-
-  const concatFilmes = lancamento.concat(streaming)
+  const concatFilmes = listaFilmes?.releases.concat(
+    ...listaFilmes.coming_soon,
+    ...listaFilmes.in_production,
+    ...listaFilmes.post_production,
+    ...listaFilmes.streaming
+  )
 
   const { dataLayerMovieFilter } = useGtag()
 
@@ -63,6 +68,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
     // setFiltroGenero('')
     // setFiltroAno('')
     setFiltroAlfabeto('')
+    if (!concatFilmes) return
     const filmesPesquisados = concatFilmes.filter(ItemPesquisados)
     setFiltroPesquisa(filmesPesquisados)
   }
@@ -100,6 +106,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
     return true
   }
 
+  if (!concatFilmes) return <Loading />
   return (
     <section className={Style.catalogo}>
       <div className="container">
@@ -118,16 +125,14 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
           <select value={filtroAno} onChange={handleAnoChange}>
             <option value="">Ano</option>
             {Array.from(
-              { length: new Date().getFullYear() - 2023 },
-              (_, index) => (
-                <option
-                  key={index}
-                  value={(new Date().getFullYear() - index).toString()}
-                >
-                  {new Date().getFullYear() - index}
+              new Set(concatFilmes.map((filme) => formatAno(filme.releasedate)))
+            )
+              .sort((a, b) => a - b)
+              .map((ano, index) => (
+                <option key={index} value={ano.toString()}>
+                  {ano}
                 </option>
-              )
-            )}
+              ))}
           </select>
           <div className={Style.areaPesquisarCatalogo}>
             <input

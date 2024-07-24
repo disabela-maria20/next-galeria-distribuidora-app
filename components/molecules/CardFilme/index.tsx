@@ -20,6 +20,9 @@ interface ICardFilmeProps {
   listaFilmes?: {
     releases: Array<IFilmeResponse>
     streaming: Array<IFilmeResponse>
+    coming_soon: Array<IFilmeResponse>
+    in_production: Array<IFilmeResponse>
+    post_production: Array<IFilmeResponse>
   }
   slide?: TSlide
   data?: IFilmeResponse
@@ -58,6 +61,12 @@ const CardFilme = ({
   const { formatarData } = useFormatarData()
   const statusTextData = useFilmeTextStatus()
   const { isMobile } = useIsMobile()
+
+  const filmes = listaFilmes?.releases.concat(
+    ...listaFilmes.coming_soon,
+    ...listaFilmes.in_production,
+    ...listaFilmes.post_production
+  )
 
   function handleVerImagem(data: IFilmeResponse) {
     setOpen(true)
@@ -122,8 +131,8 @@ const CardFilme = ({
           className={Style.slideFilmehomePromo}
           swiperOptions={filmesSwiperOptions}
         >
-          {listaFilmes?.releases
-            .reverse()
+          {filmes
+            ?.reverse()
             .sort(
               (a, b) =>
                 new Date(b.releasedate).getTime() -
@@ -191,7 +200,7 @@ const CardFilme = ({
         className={Style.slideFilmehomePromo}
         swiperOptions={filmesStreaming}
       >
-        {listaFilmes?.streaming.reverse().map((data) => (
+        {listaFilmes?.streaming?.reverse().map((data) => (
           <div key={data.id} className={Style.CardFilme}>
             <Link href={`/${data.slug}`}>
               <img src={data.cover} alt={data.title} width={300} height={200} />
