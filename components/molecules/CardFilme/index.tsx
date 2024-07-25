@@ -157,7 +157,10 @@ const CardFilme = ({
                 <h3>{data.title}</h3>
                 {!data.hasSession ? (
                   <span className={Style.data}>
-                    Estreia: {formatarData(data?.releasedate ?? '')}
+                    Estreia:{' '}
+                    {data?.releasedate == '0000-00-00'
+                      ? 'A confirmar'
+                      : formatarData(data?.releasedate)}
                   </span>
                 ) : (
                   <span className={Style.data}>{statusTextData(data)}</span>
