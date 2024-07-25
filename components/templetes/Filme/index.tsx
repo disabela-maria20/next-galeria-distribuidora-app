@@ -362,7 +362,9 @@ const Filme = (data: IFilmeProps) => {
                       </li>
                       <li>
                         <strong>Data de Estreia:</strong>
-                        {formatarData(filme?.releasedate)}
+                        {filme?.releasedate == '0000-00-00'
+                          ? 'A confirmar'
+                          : formatarData(filme?.releasedate)}
                       </li>
                     </ul>
                   </div>
