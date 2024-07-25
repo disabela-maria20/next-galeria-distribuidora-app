@@ -14,48 +14,46 @@ type Params = {
 interface ICatalogoFilmeProps {
   slug: string
 }
+
 export async function generateMetadata({
   params: { slug }
 }: Params): Promise<Metadata> {
   const filme = await getCatalogoFilme(slug)
   return {
-    title: `Galeria Distribuidora - ${filme?.movie.title}`,
-    description: filme?.movie.shortSynopsis,
+    title: `Galeria Distribuidora - ${filme?.movie.title || 'Filme'}`,
+    description: filme?.movie.shortSynopsis || 'Descrição não disponível',
     openGraph: {
-      title: filme?.movie.title,
-      description: filme?.movie.shortSynopsis,
-      images: filme?.movie.bannerDesktop
+      title: filme?.movie.title || 'Filme',
+      description: filme?.movie.shortSynopsis || 'Descrição não disponível',
+      images: filme?.movie.bannerDesktop || []
     }
   }
 }
 
-export default async function pageCatalogoFilme({ params: { slug } }: Params) {
+export default async function PageCatalogoFilme({ params: { slug } }: Params) {
   const filme = await getCatalogoFilme(slug)
 
   return (
-    <>
-      <Suspense fallback={<Loading altura={true} />}>
-        <Filme movie={filme} />
-      </Suspense>
-    </>
+    <Suspense fallback={<Loading altura={true} />}>
+      <Filme movie={filme} />
+    </Suspense>
   )
 }
 
 export async function generateStaticParams() {
   const posts = await getHome()
-  const lancamento: ICatalogoFilmeProps[] = posts.releases.map(
-    (post: { slug: string }) => ({
-      slug: post.slug
-    })
-  )
 
-  const streaming: ICatalogoFilmeProps[] = posts.streaming.map(
-    (post: { slug: string }) => ({
-      slug: post.slug
-    })
-  )
+  const concatFilmes = [
+    ...posts.releases,
+    ...posts.coming_soon,
+    ...posts.in_production,
+    ...posts.post_production,
+    ...posts.streaming
+  ]
 
-  const concat = lancamento.concat(streaming)
+  const lancamento: ICatalogoFilmeProps[] = concatFilmes.map((post) => ({
+    slug: post.slug
+  }))
 
-  return concat
+  return lancamento
 }

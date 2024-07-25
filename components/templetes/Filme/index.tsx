@@ -206,7 +206,9 @@ const Filme = (data: IFilmeProps) => {
               </h1>
               <div className={Style.subTitle}>
                 <h2 className={Style.emExibicao}>
-                  {formatarData(filme.releasedate)}
+                  {filme?.releasedate == '0000-00-00'
+                    ? 'A confirmar'
+                    : formatarData(filme?.releasedate)}
                 </h2>
                 <div className={Style.areaBtnCompra}>
                   {!isStreaming && emExibicao && !isMobile && (
