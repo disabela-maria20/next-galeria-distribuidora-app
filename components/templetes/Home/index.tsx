@@ -37,7 +37,7 @@ const Home = ({ banner, listaFilmes }: IHomeProps) => {
 
   const bannerSwiperOptions: SwiperOptions = {
     slidesPerView: 1,
-    loop: false,
+    loop: true,
     autoplay: {
       delay: 2500,
       disableOnInteraction: false
