@@ -117,13 +117,23 @@ const CardFilme = ({
     }
   }
 
-  const checkStatus = (status: string | undefined) => {
+  const checkStatus = (status: string | undefined, data: IFilmeResponse) => {
     if (!status) return
+
     const statusKey = status as Status
     const statusCorrigido = statusCorrecoes[statusKey]
+
+    if (statusCorrigido == 'Lançamento') {
+      const dia = new Date(data.releasedate).getDate()
+      const mes = new Date(data.releasedate).getMonth() + 1
+      const diaFormatado = dia < 10 ? `0${dia}` : dia
+      const mesFormatado = mes < 10 ? `0${mes}` : mes
+
+      return `${diaFormatado}/${mesFormatado} nos cinemas`
+    }
+
     return statusCorrigido
   }
-
   if (slide == 'lancamento') {
     return (
       <>
@@ -131,49 +141,49 @@ const CardFilme = ({
           className={Style.slideFilmehomePromo}
           swiperOptions={filmesSwiperOptions}
         >
-          {filmes
-            ?.reverse()
-            .sort(
-              (a, b) =>
-                new Date(b.releasedate).getTime() -
-                new Date(a.releasedate).getTime()
-            )
-            .map((data) => (
-              <div key={data.id} className={Style.CardFilme}>
-                <Link href={`/${data.slug}`}>
-                  <img
-                    src={data.cover}
-                    alt={data.title}
-                    width={300}
-                    height={200}
-                  />
+          {filmes &&
+            filmes
+              .sort(
+                (a, b) =>
+                  new Date(b.releasedate).getTime() -
+                  new Date(a.releasedate).getTime()
+              )
+              .map((data) => (
+                <div key={data.id} className={Style.CardFilme}>
+                  <Link href={`/${data.slug}`}>
+                    <img
+                      src={data.cover}
+                      alt={data.title}
+                      width={300}
+                      height={200}
+                    />
+                    <span
+                      className={Style.status}
+                      style={{ background: `${data.color_status}` }}
+                    >
+                      {checkStatus(data.status, data)}
+                    </span>
+                  </Link>
+                  <h3>{data.title}</h3>
+                  {!data.hasSession ? (
+                    <span className={Style.data}>
+                      Estreia:{' '}
+                      {data?.releasedate == '0000-00-00'
+                        ? 'A confirmar'
+                        : formatarData(data?.releasedate)}
+                    </span>
+                  ) : (
+                    <span className={Style.data}>{statusTextData(data)}</span>
+                  )}
                   <span
-                    className={Style.status}
-                    style={{ background: `${data.color_status}` }}
+                    onClick={() => handleVerImagem(data)}
+                    className={Style.tralher}
                   >
-                    {checkStatus(data.status)}
+                    <FaYoutube />
+                    <span>Assista ao Trailer</span>
                   </span>
-                </Link>
-                <h3>{data.title}</h3>
-                {!data.hasSession ? (
-                  <span className={Style.data}>
-                    Estreia:{' '}
-                    {data?.releasedate == '0000-00-00'
-                      ? 'A confirmar'
-                      : formatarData(data?.releasedate)}
-                  </span>
-                ) : (
-                  <span className={Style.data}>{statusTextData(data)}</span>
-                )}
-                <span
-                  onClick={() => handleVerImagem(data)}
-                  className={Style.tralher}
-                >
-                  <FaYoutube />
-                  <span>Assista ao Trailer</span>
-                </span>
-              </div>
-            ))}
+                </div>
+              ))}
         </Slide.Content>
         {open && (
           <Model.Root>
@@ -211,7 +221,7 @@ const CardFilme = ({
                 className={Style.status}
                 style={{ background: `${data.color_status}` }}
               >
-                {checkStatus(data.status)}
+                {checkStatus(data.status, data)}
               </span>
             </Link>
             <h3>{data.title}</h3>
@@ -220,7 +230,7 @@ const CardFilme = ({
       </Slide.Content>
     )
   }
-  if (slide == 'catalogo') {
+  if (slide == 'catalogo' && data) {
     return (
       <div key={data?.id} className={Style.CardFilme}>
         <Link href={`/${data?.slug}`}>
@@ -229,7 +239,7 @@ const CardFilme = ({
             className={Style.status}
             style={{ background: `${data?.color_status}` }}
           >
-            {checkStatus(data?.status)}
+            {checkStatus(data?.status, data)}
           </span>
         </Link>
         <h3>{data?.title}</h3>
