@@ -124,7 +124,7 @@ const CardFilme = ({
     const statusCorrigido = statusCorrecoes[statusKey]
 
     if (statusCorrigido == 'Lançamento') {
-      const dia = new Date(data.releasedate).getDate()
+      const dia = new Date(data.releasedate).getDate() + 1
       const mes = new Date(data.releasedate).getMonth() + 1
       const diaFormatado = dia < 10 ? `0${dia}` : dia
       const mesFormatado = mes < 10 ? `0${mes}` : mes
