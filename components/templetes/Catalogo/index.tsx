@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useMemo } from 'react'
 import { IoSearchSharp } from 'react-icons/io5'
 
 import Style from './Catalogo.module.scss'
@@ -21,34 +21,22 @@ interface ICatalogoProps {
 }
 
 const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
-  const currentYear = new Date().getFullYear().toString()
   const [filtroGenero, setFiltroGenero] = useState<string>('')
-  const [filtroAno, setFiltroAno] = useState<string>(currentYear) // Inicia com o ano atual
+  const [filtroAno, setFiltroAno] = useState<string>('')
   const [pesquisa, setPesquisa] = useState<string>('')
   const [filtroAlfabeto, setFiltroAlfabeto] = useState<string>('')
-  const [filtroPesquisa, setFiltroPesquisa] = useState<IFilmeResponse[]>([])
 
-  const concatFilmes = listaFilmes
-    ? [
-        ...listaFilmes.releases,
-        ...listaFilmes.coming_soon,
-        ...listaFilmes.in_production,
-        ...listaFilmes.post_production,
-        ...listaFilmes.streaming
-      ]
-    : []
-
-  const anosDisponiveis = Array.from(
-    new Set(concatFilmes.map((filme) => filme.releaseYear))
-  ).sort((a, b) => Number(b) - Number(a))
+  const concatFilmes = useMemo(() => {
+    if (!listaFilmes) return []
+    return listaFilmes.releases.concat(
+      listaFilmes.coming_soon,
+      listaFilmes.in_production,
+      listaFilmes.post_production,
+      listaFilmes.streaming
+    )
+  }, [listaFilmes])
 
   const { dataLayerMovieFilter } = useGtag()
-
-  useEffect(() => {
-    if (concatFilmes) {
-      setFiltroPesquisa(concatFilmes.filter(filtrarFilmes))
-    }
-  }, [filtroAno, concatFilmes])
 
   const handleGeneroChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const novoGenero = event.target.value
@@ -57,59 +45,55 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
   }
 
   const handleAnoChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setFiltroAno(event.target.value)
+    const novoAno = event.target.value
+    setFiltroAno(novoAno)
   }
 
   const handleFiltroAlfabeto = (letra: string) => {
     setPesquisa('')
-    setFiltroPesquisa([])
     setFiltroAlfabeto(letra)
   }
 
   const handlePesquisa = () => {
-    setFiltroAlfabeto('')
     if (!concatFilmes) return
-    const filmesPesquisados = concatFilmes.filter(ItemPesquisados)
-    setFiltroPesquisa(filmesPesquisados)
-  }
-
-  const ItemPesquisados = (filme: IFilmeResponse) => {
-    return filme.title.toLowerCase().includes(pesquisa.toLowerCase())
+    // Atualize a filtragem com base na pesquisa, mas o filtro não será mais mantido
   }
 
   const filtrarFilmes = (filme: IFilmeResponse) => {
-    if (filtroPesquisa.length > 0 && !filtroPesquisa.includes(filme)) {
+    if (filtroGenero && filme.genre !== filtroGenero) return false
+    if (filtroAno && parseInt(filme.releaseYear) !== parseInt(filtroAno))
       return false
-    }
-
-    if (filtroGenero && filme.genre !== filtroGenero) {
-      return false
-    }
-    if (filtroAno && filme.releaseYear !== filtroAno) {
-      return false
-    }
-
-    if (filtroAlfabeto === '#' && !isNaN(parseInt(filme.title.charAt(0)))) {
+    if (filtroAlfabeto === '#' && !isNaN(parseInt(filme.title.charAt(0))))
       return true
-    }
     if (
       filtroAlfabeto &&
       filme.title.charAt(0).toUpperCase() !== filtroAlfabeto
-    ) {
+    )
       return false
-    }
-
     return true
   }
 
+  const filmesFiltrados = useMemo(() => {
+    return concatFilmes
+      .filter(filtrarFilmes)
+      .filter(
+        (filme) =>
+          !pesquisa ||
+          filme.title.toLowerCase().includes(pesquisa.toLowerCase())
+      )
+  }, [concatFilmes, filtroAno, filtroAlfabeto, filtroGenero, pesquisa])
+
   if (!concatFilmes) return <Loading />
+
   return (
     <section className={Style.catalogo}>
       <div className="container">
         <h1>Filmes</h1>
         <div className={Style.gridCatalogo}>
           <select value={filtroGenero} onChange={handleGeneroChange}>
-            <option value="">Gênero</option>
+            <option value="" disabled>
+              Gênero
+            </option>
             {Array.from(new Set(concatFilmes.map((data) => data.genre))).map(
               (genre, index) => (
                 <option key={index} value={genre}>
@@ -119,12 +103,16 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
             )}
           </select>
           <select value={filtroAno} onChange={handleAnoChange}>
-            <option value="">Ano</option>
-            {anosDisponiveis.map((ano, index) => (
-              <option key={index} value={ano}>
-                {ano}
-              </option>
-            ))}
+            <option value="" disabled>
+              Ano
+            </option>
+            {Array.from(new Set(concatFilmes.map((filme) => filme.releaseYear)))
+              .sort((a: any, b: any) => a - b)
+              .map((ano, index) => (
+                <option key={index} value={ano.toString()}>
+                  {ano}
+                </option>
+              ))}
           </select>
           <div className={Style.areaPesquisarCatalogo}>
             <input
@@ -154,35 +142,63 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
             </button>
           ))}
         </div>
-        {(filtroPesquisa.length > 0 ||
-          concatFilmes.filter(filtrarFilmes).length > 0) && (
+        {filmesFiltrados.length > 0 && (
           <>
-            <div className={Style.areaTitleCatalogoFilmeAno}>
-              <h2>{filtroAno}</h2> <span></span>
-            </div>
-            <div className={Style.gridFilmesCatalogo}>
-              {(filtroPesquisa.length > 0
-                ? filtroPesquisa
-                : concatFilmes.filter(filtrarFilmes)
-              )
-                .sort(
-                  (a, b) =>
-                    new Date(b.releaseYear).getTime() -
-                    new Date(a.releaseYear).getTime()
+            {['2024', '2025'].map(
+              (ano) =>
+                filmesFiltrados.filter((data) => data.releaseYear === ano)
+                  .length > 0 && (
+                  <>
+                    <div className={Style.areaTitleCatalogoFilmeAno}>
+                      <h2>{ano}</h2> <span></span>
+                    </div>
+                    <div className={Style.gridFilmesCatalogo}>
+                      {filmesFiltrados
+                        .filter((data) => data.releaseYear === ano)
+                        .sort(
+                          (a, b) =>
+                            new Date(b.releaseYear).getTime() -
+                            new Date(a.releaseYear).getTime()
+                        )
+                        .map((data) => (
+                          <div key={data.id}>
+                            <CardFilme data={data} slide="catalogo" />
+                          </div>
+                        ))}
+                    </div>
+                  </>
                 )
-                .map((data) => (
-                  <div key={data.id}>
-                    <CardFilme data={data} slide="catalogo" />
-                  </div>
-                ))}
-            </div>
+            )}
+            {filmesFiltrados.filter(
+              (data) => !['2024', '2025'].includes(data.releaseYear)
+            ).length > 0 && (
+              <>
+                <div className={Style.areaTitleCatalogoFilmeAno}>
+                  <h2>Catalogo</h2> <span></span>
+                </div>
+                <div className={Style.gridFilmesCatalogo}>
+                  {filmesFiltrados
+                    .filter(
+                      (data) => !['2024', '2025'].includes(data.releaseYear)
+                    )
+                    .sort(
+                      (a, b) =>
+                        new Date(b.releaseYear).getTime() -
+                        new Date(a.releaseYear).getTime()
+                    )
+                    .map((data) => (
+                      <div key={data.id}>
+                        <CardFilme data={data} slide="catalogo" />
+                      </div>
+                    ))}
+                </div>
+              </>
+            )}
           </>
         )}
-
-        {filtroPesquisa.length === 0 &&
-          concatFilmes.filter(filtrarFilmes).length === 0 && (
-            <p className={Style.CatalogoVazio}>Nenhum filme encontrado</p>
-          )}
+        {filmesFiltrados.length === 0 && (
+          <p className={Style.CatalogoVazio}>Nenhum filme encontrado</p>
+        )}
       </div>
     </section>
   )
