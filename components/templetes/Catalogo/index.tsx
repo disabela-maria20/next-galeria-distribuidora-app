@@ -54,19 +54,16 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
   }
 
   const handlePesquisa = () => {
-    // Quando há uma pesquisa, ignore todos os filtros e exiba todos os filmes que correspondem à pesquisa.
     setFiltroGenero('')
     setFiltroAno('')
     setFiltroAlfabeto('')
   }
 
   const filtrarFilmes = (filme: IFilmeResponse) => {
-    // Se houver uma pesquisa, ignore todos os outros filtros e apenas filtre pela pesquisa.
     if (pesquisa) {
       return filme.title.toLowerCase().includes(pesquisa.toLowerCase())
     }
 
-    // Aplicar filtros normais
     if (filtroGenero && filme.genre !== filtroGenero) return false
     if (filtroAno && parseInt(filme.releaseYear) !== parseInt(filtroAno))
       return false
@@ -82,7 +79,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
 
   const filmesFiltrados = useMemo(() => {
     return concatFilmes.filter(filtrarFilmes)
-  }, [concatFilmes, filtroAno, filtroAlfabeto, filtroGenero, pesquisa])
+  }, [concatFilmes, filtrarFilmes])
 
   if (!concatFilmes) return <Loading />
 
@@ -144,10 +141,9 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
           <>
             {['2024', '2025'].map(
               (ano) =>
-                filmesFiltrados
-              .filter((data) => data.releaseYear === ano)
+                filmesFiltrados.filter((data) => data.releaseYear === ano)
                   .length > 0 && (
-                  <>
+                  <React.Fragment key={ano}>
                     <div className={Style.areaTitleCatalogoFilmeAno}>
                       <h2>{ano}</h2> <span></span>
                     </div>
@@ -165,7 +161,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
                           </div>
                         ))}
                     </div>
-                  </>
+                  </React.Fragment>
                 )
             )}
             {filmesFiltrados.filter(
