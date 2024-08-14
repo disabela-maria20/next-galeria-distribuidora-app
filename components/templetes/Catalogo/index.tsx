@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import React, { useState, useMemo } from 'react'
 import { IoSearchSharp } from 'react-icons/io5'
@@ -55,11 +54,19 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
   }
 
   const handlePesquisa = () => {
-    if (!concatFilmes) return
-    // Atualize a filtragem com base na pesquisa, mas o filtro não será mais mantido
+    // Quando há uma pesquisa, ignore todos os filtros e exiba todos os filmes que correspondem à pesquisa.
+    setFiltroGenero('')
+    setFiltroAno('')
+    setFiltroAlfabeto('')
   }
 
   const filtrarFilmes = (filme: IFilmeResponse) => {
+    // Se houver uma pesquisa, ignore todos os outros filtros e apenas filtre pela pesquisa.
+    if (pesquisa) {
+      return filme.title.toLowerCase().includes(pesquisa.toLowerCase())
+    }
+
+    // Aplicar filtros normais
     if (filtroGenero && filme.genre !== filtroGenero) return false
     if (filtroAno && parseInt(filme.releaseYear) !== parseInt(filtroAno))
       return false
@@ -74,13 +81,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
   }
 
   const filmesFiltrados = useMemo(() => {
-    return concatFilmes
-      .filter(filtrarFilmes)
-      .filter(
-        (filme) =>
-          !pesquisa ||
-          filme.title.toLowerCase().includes(pesquisa.toLowerCase())
-      )
+    return concatFilmes.filter(filtrarFilmes)
   }, [concatFilmes, filtroAno, filtroAlfabeto, filtroGenero, pesquisa])
 
   if (!concatFilmes) return <Loading />
@@ -91,9 +92,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
         <h1>Filmes</h1>
         <div className={Style.gridCatalogo}>
           <select value={filtroGenero} onChange={handleGeneroChange}>
-            <option value="" disabled>
-              Gênero
-            </option>
+            <option value="">Gênero</option>
             {Array.from(new Set(concatFilmes.map((data) => data.genre))).map(
               (genre, index) => (
                 <option key={index} value={genre}>
@@ -103,10 +102,9 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
             )}
           </select>
           <select value={filtroAno} onChange={handleAnoChange}>
-            <option value="" disabled>
-              Ano
-            </option>
+            <option value="">Ano</option>
             {Array.from(new Set(concatFilmes.map((filme) => filme.releaseYear)))
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               .sort((a: any, b: any) => a - b)
               .map((ano, index) => (
                 <option key={index} value={ano.toString()}>
