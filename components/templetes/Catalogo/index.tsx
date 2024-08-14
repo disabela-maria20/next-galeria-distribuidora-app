@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import React, { useState } from 'react'
 import { IoSearchSharp } from 'react-icons/io5'
@@ -6,7 +7,6 @@ import Style from './Catalogo.module.scss'
 
 import { Loading } from '@/components/atoms'
 import { CardFilme } from '@/components/molecules'
-import { useFormatarData } from '@/utils/hooks/useFormatarData/formatarData'
 import { useGtag } from '@/utils/lib/gtag'
 import { IFilmeResponse } from '@/utils/server/types'
 
@@ -26,7 +26,6 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
   const [pesquisa, setPesquisa] = useState<string>('')
   const [filtroAlfabeto, setFiltroAlfabeto] = useState<string>('')
   const [filtroPesquisa, setFiltroPesquisa] = useState<IFilmeResponse[]>([])
-  const { formatAno } = useFormatarData()
 
   const concatFilmes = listaFilmes?.releases.concat(
     ...listaFilmes.coming_soon,
@@ -87,7 +86,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
     if (filtroGenero && filme.genre !== filtroGenero) {
       return false
     }
-    if (filtroAno && formatAno(filme.releasedate) !== parseInt(filtroAno)) {
+    if (filtroAno && parseInt(filme.releaseYear) !== parseInt(filtroAno)) {
       return false
     }
 
@@ -100,9 +99,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
     ) {
       return false
     }
-    if (filtroAno === '2024' && formatAno(filme.releasedate) !== 2024) {
-      return false
-    }
+
     return true
   }
 
@@ -124,10 +121,8 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
           </select>
           <select value={filtroAno} onChange={handleAnoChange}>
             <option value="">Ano</option>
-            {Array.from(
-              new Set(concatFilmes.map((filme) => formatAno(filme.releasedate)))
-            )
-              .sort((a, b) => a - b)
+            {Array.from(new Set(concatFilmes.map((filme) => filme.releaseYear)))
+              .sort((a: any, b: any) => a - b)
               .map((ano, index) => (
                 <option key={index} value={ano.toString()}>
                   {ano}
@@ -176,8 +171,8 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
               )
                 .sort(
                   (a, b) =>
-                    new Date(b.releasedate).getTime() -
-                    new Date(a.releasedate).getTime()
+                    new Date(b.releaseYear).getTime() -
+                    new Date(a.releaseYear).getTime()
                 )
                 .map((data) => (
                   <div key={data.id}>

@@ -36,6 +36,7 @@ export interface IFilmeResponse extends IFilmeProps {
   hasSession: boolean
   idVibezzMovie: string
   color_status: string
+  releaseYear: string
 }
 
 export interface IStreaming {
