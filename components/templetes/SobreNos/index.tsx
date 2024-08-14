@@ -53,7 +53,7 @@ const SobreNos = ({ listaFilmes }: ISobreNosProps) => {
   return (
     <section className={Style.SobreNos}>
       <div className="container" style={{ overflow: 'hidden' }}>
-        <img src="/img/logo.webp" alt="logo" width={300} height={200} />
+        {/* <img src="/img/logo.webp" alt="logo" width={300} height={200} /> */}
         <h1>SOBRE NÓS</h1>
         <h2>Uma companhia brasileira, nascida para fazer diferente</h2>
         <p>
