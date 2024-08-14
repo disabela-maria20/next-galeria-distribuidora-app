@@ -144,7 +144,8 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
           <>
             {['2024', '2025'].map(
               (ano) =>
-                filmesFiltrados.filter((data) => data.releaseYear === ano)
+                filmesFiltrados
+              .filter((data) => data.releaseYear === ano)
                   .length > 0 && (
                   <>
                     <div className={Style.areaTitleCatalogoFilmeAno}>
@@ -155,8 +156,8 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
                         .filter((data) => data.releaseYear === ano)
                         .sort(
                           (a, b) =>
-                            new Date(b.releaseYear).getTime() -
-                            new Date(a.releaseYear).getTime()
+                            new Date(b.releasedate).getTime() -
+                            new Date(a.releasedate).getTime()
                         )
                         .map((data) => (
                           <div key={data.id}>
