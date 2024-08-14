@@ -172,7 +172,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
             ).length > 0 && (
               <>
                 <div className={Style.areaTitleCatalogoFilmeAno}>
-                  <h2>Catalogo</h2> <span></span>
+                  <h2>CATÁLOGO</h2> <span></span>
                 </div>
                 <div className={Style.gridFilmesCatalogo}>
                   {filmesFiltrados
