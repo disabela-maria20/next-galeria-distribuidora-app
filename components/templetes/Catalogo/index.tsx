@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { IoSearchSharp } from 'react-icons/io5'
 
 import Style from './Catalogo.module.scss'
@@ -21,51 +21,52 @@ interface ICatalogoProps {
 }
 
 const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
+  const currentYear = new Date().getFullYear().toString()
   const [filtroGenero, setFiltroGenero] = useState<string>('')
-  const [filtroAno, setFiltroAno] = useState<string>('')
+  const [filtroAno, setFiltroAno] = useState<string>(currentYear) // Inicia com o ano atual
   const [pesquisa, setPesquisa] = useState<string>('')
   const [filtroAlfabeto, setFiltroAlfabeto] = useState<string>('')
   const [filtroPesquisa, setFiltroPesquisa] = useState<IFilmeResponse[]>([])
 
-  const concatFilmes = listaFilmes?.releases.concat(
-    ...listaFilmes.coming_soon,
-    ...listaFilmes.in_production,
-    ...listaFilmes.post_production,
-    ...listaFilmes.streaming
-  )
+  const concatFilmes = listaFilmes
+    ? [
+        ...listaFilmes.releases,
+        ...listaFilmes.coming_soon,
+        ...listaFilmes.in_production,
+        ...listaFilmes.post_production,
+        ...listaFilmes.streaming
+      ]
+    : []
+
+  const anosDisponiveis = Array.from(
+    new Set(concatFilmes.map((filme) => filme.releaseYear))
+  ).sort((a, b) => Number(b) - Number(a))
 
   const { dataLayerMovieFilter } = useGtag()
 
+  useEffect(() => {
+    if (concatFilmes) {
+      setFiltroPesquisa(concatFilmes.filter(filtrarFilmes))
+    }
+  }, [filtroAno, concatFilmes])
+
   const handleGeneroChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    // setFiltroAno('')
-    // setPesquisa('')
-    // setFiltroAlfabeto('')
-    // setFiltroPesquisa([])
     const novoGenero = event.target.value
     setFiltroGenero(novoGenero)
     dataLayerMovieFilter('Filmes | Diamond Film', 'filmes', '', novoGenero, 0)
   }
 
   const handleAnoChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    // setFiltroGenero('')
-    // setPesquisa('')
-    // setFiltroAlfabeto('')
-    // setFiltroPesquisa([])
-    const novoAno = event.target.value
-    setFiltroAno(novoAno)
+    setFiltroAno(event.target.value)
   }
 
   const handleFiltroAlfabeto = (letra: string) => {
-    // setFiltroGenero('')
-    // setFiltroAno('')
     setPesquisa('')
     setFiltroPesquisa([])
     setFiltroAlfabeto(letra)
   }
 
   const handlePesquisa = () => {
-    // setFiltroGenero('')
-    // setFiltroAno('')
     setFiltroAlfabeto('')
     if (!concatFilmes) return
     const filmesPesquisados = concatFilmes.filter(ItemPesquisados)
@@ -73,9 +74,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
   }
 
   const ItemPesquisados = (filme: IFilmeResponse) => {
-    if (filme.title.toLowerCase().includes(pesquisa.toLowerCase())) {
-      return filme.title.toLowerCase().includes(pesquisa.toLowerCase())
-    }
+    return filme.title.toLowerCase().includes(pesquisa.toLowerCase())
   }
 
   const filtrarFilmes = (filme: IFilmeResponse) => {
@@ -86,7 +85,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
     if (filtroGenero && filme.genre !== filtroGenero) {
       return false
     }
-    if (filtroAno && parseInt(filme.releaseYear) !== parseInt(filtroAno)) {
+    if (filtroAno && filme.releaseYear !== filtroAno) {
       return false
     }
 
@@ -121,13 +120,11 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
           </select>
           <select value={filtroAno} onChange={handleAnoChange}>
             <option value="">Ano</option>
-            {Array.from(new Set(concatFilmes.map((filme) => filme.releaseYear)))
-              .sort((a: any, b: any) => a - b)
-              .map((ano, index) => (
-                <option key={index} value={ano.toString()}>
-                  {ano}
-                </option>
-              ))}
+            {anosDisponiveis.map((ano, index) => (
+              <option key={index} value={ano}>
+                {ano}
+              </option>
+            ))}
           </select>
           <div className={Style.areaPesquisarCatalogo}>
             <input
@@ -136,7 +133,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
               value={pesquisa}
               onChange={({ target }) => setPesquisa(target.value)}
             />
-            <button onClick={() => handlePesquisa()}>
+            <button onClick={handlePesquisa}>
               <IoSearchSharp />
             </button>
           </div>
@@ -161,13 +158,12 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
           concatFilmes.filter(filtrarFilmes).length > 0) && (
           <>
             <div className={Style.areaTitleCatalogoFilmeAno}>
-              <h2>2024</h2> <span></span>
+              <h2>{filtroAno}</h2> <span></span>
             </div>
             <div className={Style.gridFilmesCatalogo}>
               {(filtroPesquisa.length > 0
                 ? filtroPesquisa
-                : // eslint-disable-next-line no-unsafe-optional-chaining
-                  concatFilmes.filter(filtrarFilmes)
+                : concatFilmes.filter(filtrarFilmes)
               )
                 .sort(
                   (a, b) =>
