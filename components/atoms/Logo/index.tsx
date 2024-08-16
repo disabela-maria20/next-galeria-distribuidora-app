@@ -1,12 +1,12 @@
 import Style from './Logo.module.scss'
 
-type TypeLogo = 'logo.webp' | 'logo-BRANCO.png'
+type TypeLogo = 'logo.png' | 'logo-BRANCO.png'
 
 interface IPropsLogo {
   logo: TypeLogo
 }
 
-const Logo = ({ logo = 'logo.webp' }: IPropsLogo): JSX.Element => {
+const Logo = ({ logo = 'logo.png' }: IPropsLogo): JSX.Element => {
   return (
     <img
       src={`/img/${logo}`}
