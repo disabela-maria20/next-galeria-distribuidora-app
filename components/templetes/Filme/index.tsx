@@ -33,7 +33,7 @@ enum EStatus {
 }
 
 const classificacoesIndicativas = [
-  { idade: 'Livre', cor: '#048f16' },
+  { idade: '0', cor: '#048f16' },
   { idade: '10', cor: '#0281df' },
   { idade: '12', cor: '#f5d218' },
   { idade: '14', cor: '#f0850c' },
@@ -333,7 +333,7 @@ const Filme = (data: IFilmeProps) => {
                             background: `${setDefinirCorClassificacaoIndicativa(filme?.age)}`
                           }}
                         >
-                          {filme?.age}
+                          {filme.age == '0' ? 'L' : filme?.age}
                         </span>
                       )}
 
