@@ -28,7 +28,7 @@ const Menu = (): JSX.Element => {
             <div className={Style.flexMobile}>
               <Burger open={!open} setOpen={() => setOpen(!open)} />
               <Link href="/">
-                <Logo logo={'logo.webp'} />
+                <Logo logo={'logo.png'} />
               </Link>
               {/* {isMobile && <Search />} */}
             </div>
