@@ -132,7 +132,7 @@ const CardFilme = ({
       return `${diaFormatado}/${mesFormatado} nos cinemas`
     }
 
-    if (data.streaming.length > 0) {
+    if (data.streaming.length > 0 && statusCorrigido == 'Lançamento') {
       return `${diaFormatado}/${mesFormatado} em Streaming`
     }
 
