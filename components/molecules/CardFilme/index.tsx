@@ -133,7 +133,7 @@ const CardFilme = ({
     }
 
     if (data.streaming.length > 0 && statusCorrigido == 'Lançamento') {
-      return `${diaFormatado}/${mesFormatado} em Streaming`
+      return `${diaFormatado}/${mesFormatado} na ${data.streaming[0].platform}`
     }
 
     return statusCorrigido
