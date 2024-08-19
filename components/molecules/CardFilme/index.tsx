@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import Link from 'next/link'
@@ -218,15 +219,10 @@ const CardFilme = ({
         swiperOptions={filmesStreaming}
       >
         {listaFilmes?.streaming
-          ?.sort((a, b) => {
-            const [dayA, monthA, yearA] = a.releaseYear.split('-').map(Number)
-            const [dayB, monthB, yearB] = b.releaseYear.split('-').map(Number)
-
-            return (
-              yearB - yearA || // Ordena por ano
-              monthB - monthA || // Se os anos forem iguais, ordena por mês
-              dayB - dayA // Se os meses forem iguais, ordena por dia
-            )
+          ?.sort((a: any, b: any) => {
+            const dataA: any = new Date(a.releasedate)
+            const dataB: any = new Date(b.releasedate)
+            return dataB - dataA
           })
           .map((data) => (
             <div key={data.id} className={Style.CardFilme}>
