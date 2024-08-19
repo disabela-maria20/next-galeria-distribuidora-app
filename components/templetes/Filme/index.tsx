@@ -58,7 +58,6 @@ function converterParaHorasEMinutos(totalMinutos: number) {
 
 const Filme = (data: IFilmeProps) => {
   const filme = data.movie?.movie
-
   //const streaming = filme.streaming.map((data) => data.platform).join(',')
   const isStreaming = filme.status == EStatus.STREAMING
 
@@ -182,10 +181,62 @@ const Filme = (data: IFilmeProps) => {
       </div>
     )
   }
-  const setColor = (slug: string) => {
-    const colorTitle = ['guerracivil']
-    const color = colorTitle.includes(slug)
-    return color ? '#01fc30' : filme.color
+
+  const viewstreaming = (streaming: string) => {
+    if (streaming == 'Netflix') {
+      return (
+        <>
+          <button
+            onClick={() => {
+              dataLayerMovieStream(
+                filme.title,
+                filme.slug,
+                filme.originalTitle,
+                filme.genre,
+                filme.streaming.toString(),
+                Number(filme.idVibezzMovie)
+              )
+              window.location.href = 'https://www.netflix.com/'
+            }}
+          >
+            ASSISTA AGORA NO
+            <LazyLoadImage
+              src={`/img/streaming/${'netflix'}.png`}
+              // alt={service.toLowerCase()}
+              width="100"
+              effect="blur"
+            />
+          </button>
+        </>
+      )
+    }
+    if (streaming == 'Amazon Prime Video') {
+      return (
+        <>
+          <button
+            onClick={() => {
+              dataLayerMovieStream(
+                filme.title,
+                filme.slug,
+                filme.originalTitle,
+                filme.genre,
+                filme.streaming.toString(),
+                Number(filme.idVibezzMovie)
+              )
+            }}
+          >
+            ASSISTA AGORA NO
+            <LazyLoadImage
+              src={`/img/streaming/${'amazonprime'}.png`}
+              // alt={service.toLowerCase()}
+              width="100"
+              effect="blur"
+            />
+          </button>
+        </>
+      )
+    }
+    return
   }
 
   if (isLoading) return <Loading altura={true} />
@@ -201,9 +252,7 @@ const Filme = (data: IFilmeProps) => {
         <div className={Style.bannerFilme}>
           <div className="container">
             <div className={Style.areaTituloBanner}>
-              <h1 style={{ color: `${setColor(filme.slug)}` }}>
-                {filme?.title}
-              </h1>
+              <h1 style={{ color: `${filme.slug}` }}>{filme?.title}</h1>
               <div className={Style.subTitle}>
                 <h2 className={Style.emExibicao}>
                   {filme?.releasedate == '0000-00-00'
@@ -221,27 +270,11 @@ const Filme = (data: IFilmeProps) => {
                     </button>
                   )}
                   {filme.streaming.length > 0 && !isMobile && (
-                    <button
-                      onClick={() => {
-                        dataLayerMovieStream(
-                          filme.title,
-                          filme.slug,
-                          filme.originalTitle,
-                          filme.genre,
-                          filme.streaming.toString(),
-                          Number(filme.idVibezzMovie)
-                        )
-                        window.location.href = ' https://www.primevideo.com/'
-                      }}
-                    >
-                      ASSISTA AGORA NO
-                      <LazyLoadImage
-                        src={`/img/streaming/${'amazonprime'}.png`}
-                        // alt={service.toLowerCase()}
-                        width="100"
-                        effect="blur"
-                      />
-                    </button>
+                    <>
+                      {filme.streaming.map((data) =>
+                        viewstreaming(data.platform)
+                      )}
+                    </>
                   )}
                 </div>
               </div>
@@ -284,26 +317,7 @@ const Filme = (data: IFilmeProps) => {
             </div>
           )}
           {filme.streaming.length > 0 && isMobile && (
-            <button
-              onClick={() => {
-                dataLayerMovieStream(
-                  filme.title,
-                  filme.slug,
-                  filme.originalTitle,
-                  filme.genre,
-                  filme.streaming.toString(),
-                  Number(filme.idVibezzMovie)
-                )
-              }}
-            >
-              ASSISTA AGORA NO
-              <LazyLoadImage
-                src={`/img/streaming/${'amazonprime'}.png`}
-                // alt={service.toLowerCase()}
-                width="100"
-                effect="blur"
-              />
-            </button>
+            <>{filme.streaming.map((data) => viewstreaming(data.platform))}</>
           )}
 
           {saibaMais && (

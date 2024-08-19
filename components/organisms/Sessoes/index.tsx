@@ -173,6 +173,7 @@ const Sessoes: React.FC<ISessoesProps> = ({ color, poster, filme }) => {
         const res = await getSession(filme.slug, cities)
         setSessoes(res)
       }
+      return
     }
     getFilmeSessoes()
   }, [filme.slug, cities, location])
