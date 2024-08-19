@@ -123,13 +123,17 @@ const CardFilme = ({
     const statusKey = status as Status
     const statusCorrigido = statusCorrecoes[statusKey]
 
-    if (statusCorrigido == 'Lançamento') {
-      const dia = new Date(data.releasedate).getDate() + 1
-      const mes = new Date(data.releasedate).getMonth() + 1
-      const diaFormatado = dia < 10 ? `0${dia}` : dia
-      const mesFormatado = mes < 10 ? `0${mes}` : mes
+    const dia = new Date(data.releasedate).getDate() + 1
+    const mes = new Date(data.releasedate).getMonth() + 1
+    const diaFormatado = dia < 10 ? `0${dia}` : dia
+    const mesFormatado = mes < 10 ? `0${mes}` : mes
 
+    if (statusCorrigido == 'Lançamento' && data.streaming.length == 0) {
       return `${diaFormatado}/${mesFormatado} nos cinemas`
+    }
+
+    if (data.streaming.length > 0) {
+      return `${diaFormatado}/${mesFormatado} em Streaming`
     }
 
     return statusCorrigido
@@ -145,8 +149,8 @@ const CardFilme = ({
             filmes
               .sort(
                 (a, b) =>
-                  new Date(b.releasedate).getTime() -
-                  new Date(a.releasedate).getTime()
+                  new Date(a.releasedate).getTime() -
+                  new Date(b.releasedate).getTime()
               )
               .map((data) => (
                 <div key={data.id} className={Style.CardFilme}>
@@ -213,20 +217,36 @@ const CardFilme = ({
         className={Style.slideFilmehomePromo}
         swiperOptions={filmesStreaming}
       >
-        {listaFilmes?.streaming?.reverse().map((data) => (
-          <div key={data.id} className={Style.CardFilme}>
-            <Link href={`/${data.slug}`}>
-              <img src={data.cover} alt={data.title} width={300} height={200} />
-              <span
-                className={Style.status}
-                style={{ background: `${data.color_status}` }}
-              >
-                {checkStatus(data.status, data)}
-              </span>
-            </Link>
-            <h3>{data.title}</h3>
-          </div>
-        ))}
+        {listaFilmes?.streaming
+          ?.sort((a, b) => {
+            const [dayA, monthA, yearA] = a.releaseYear.split('-').map(Number)
+            const [dayB, monthB, yearB] = b.releaseYear.split('-').map(Number)
+
+            return (
+              yearB - yearA || // Ordena por ano
+              monthB - monthA || // Se os anos forem iguais, ordena por mês
+              dayB - dayA // Se os meses forem iguais, ordena por dia
+            )
+          })
+          .map((data) => (
+            <div key={data.id} className={Style.CardFilme}>
+              <Link href={`/${data.slug}`}>
+                <img
+                  src={data.cover}
+                  alt={data.title}
+                  width={300}
+                  height={200}
+                />
+                <span
+                  className={Style.status}
+                  style={{ background: `${data.color_status}` }}
+                >
+                  {checkStatus(data.status, data)}
+                </span>
+              </Link>
+              <h3>{data.title}</h3>
+            </div>
+          ))}
       </Slide.Content>
     )
   }

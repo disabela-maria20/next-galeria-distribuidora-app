@@ -152,8 +152,8 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
                         .filter((data) => data.releaseYear === ano)
                         .sort(
                           (a, b) =>
-                            new Date(b.releasedate).getTime() -
-                            new Date(a.releasedate).getTime()
+                            new Date(a.releasedate).getTime() -
+                            new Date(b.releasedate).getTime()
                         )
                         .map((data) => (
                           <div key={data.id}>
@@ -173,14 +173,20 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
                 </div>
                 <div className={Style.gridFilmesCatalogo}>
                   {filmesFiltrados
+                    ?.sort((a, b) => {
+                      const [dayA, monthA, yearA] = a.releaseYear
+                        .split('-')
+                        .map(Number)
+                      const [dayB, monthB, yearB] = b.releaseYear
+                        .split('-')
+                        .map(Number)
+
+                      return yearB - yearA || monthB - monthA || dayB - dayA
+                    })
                     .filter(
                       (data) => !['2024', '2025'].includes(data.releaseYear)
                     )
-                    .sort(
-                      (a, b) =>
-                        new Date(b.releaseYear).getTime() -
-                        new Date(a.releaseYear).getTime()
-                    )
+
                     .map((data) => (
                       <div key={data.id}>
                         <CardFilme data={data} slide="catalogo" />

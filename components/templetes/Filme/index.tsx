@@ -58,6 +58,8 @@ function converterParaHorasEMinutos(totalMinutos: number) {
 
 const Filme = (data: IFilmeProps) => {
   const filme = data.movie?.movie
+  console.log(filme)
+
   //const streaming = filme.streaming.map((data) => data.platform).join(',')
   const isStreaming = filme.status == EStatus.STREAMING
 
