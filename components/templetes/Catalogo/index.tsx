@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import React, { useState, useMemo } from 'react'
 import { IoSearchSharp } from 'react-icons/io5'
@@ -173,15 +174,10 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
                 </div>
                 <div className={Style.gridFilmesCatalogo}>
                   {filmesFiltrados
-                    ?.sort((a, b) => {
-                      const [dayA, monthA, yearA] = a.releaseYear
-                        .split('-')
-                        .map(Number)
-                      const [dayB, monthB, yearB] = b.releaseYear
-                        .split('-')
-                        .map(Number)
-
-                      return yearB - yearA || monthB - monthA || dayB - dayA
+                    .sort((a: any, b: any) => {
+                      const dataA: any = new Date(a.releasedate)
+                      const dataB: any = new Date(b.releasedate)
+                      return dataB - dataA
                     })
                     .filter(
                       (data) => !['2024', '2025'].includes(data.releaseYear)
