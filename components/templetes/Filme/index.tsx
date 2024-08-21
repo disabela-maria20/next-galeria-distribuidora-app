@@ -404,7 +404,7 @@ const Filme = (data: IFilmeProps) => {
                     >
                       <iframe
                         className={Style.embedResponsiveItem}
-                        src={`${data.url}?enablejsapi=1&origin=diamondfilms.com.br`}
+                        src={`${data.url}?enablejsapi=1&origin=galeriadistribuidora.com.br`}
                         title="YouTube video player"
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

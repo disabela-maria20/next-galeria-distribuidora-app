@@ -41,7 +41,7 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
   const handleGeneroChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const novoGenero = event.target.value
     setFiltroGenero(novoGenero)
-    dataLayerMovieFilter('Filmes | Diamond Film', 'filmes', '', novoGenero, 0)
+    dataLayerMovieFilter('Filmes | Galeria Filmes', 'filmes', '', novoGenero, 0)
   }
 
   const handleAnoChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

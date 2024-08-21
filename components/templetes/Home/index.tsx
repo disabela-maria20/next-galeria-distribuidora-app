@@ -51,7 +51,7 @@ const Home = ({ banner, listaFilmes }: IHomeProps) => {
 
   useEffect(() => {
     const pageView = () => {
-      dataLayerHome('Diamond Films', '')
+      dataLayerHome('Galeria Filmess', '')
     }
     pageView()
     // eslint-disable-next-line react-hooks/exhaustive-deps

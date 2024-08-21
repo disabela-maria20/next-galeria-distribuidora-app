@@ -28,11 +28,11 @@ export const metadata: Metadata = {
   twitter: {
     title: 'Home | Galeria Distribuidora',
     description: "Descubra os filmes mais recentes distribuídos pela Galeria Distribuidora Brasil. Confira os trailers, sinopses e datas de lançamento.",
-    site: 'https://diamondfilms.com.br/',
+    site: 'https://galeriadistribuidora.com.br/',
     images: '/img/share.png'
   },
   alternates: {
-    canonical: 'http://diamondfilms.com.br'
+    canonical: 'http://galeriadistribuidora.com.br'
   },
   category: 'Filmes',
 
