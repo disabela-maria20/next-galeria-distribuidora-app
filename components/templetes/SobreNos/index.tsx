@@ -57,27 +57,29 @@ const SobreNos = ({ listaFilmes }: ISobreNosProps) => {
         <h1>SOBRE NÓS</h1>
         <h2>Uma companhia brasileira, nascida para fazer diferente</h2>
         <p>
-          Fundada em 2018, a Galeria Distribuidora é uma jovem empresa
-          brasileira que atua no desenvolvimento, produção e distribuição de
-          longas-metragens e séries nacionais. Inovação e dinamismo estão no DNA
-          da Galeria, que atua em parceria com as maiores produtoras do país,
-          desde o início de cada projeto. Focada em conteúdos comerciais e com
-          grande apelo junto ao público, a empresa apresenta em seu catálogo
-          filmes como `Detetive Madeinusa`, comédia com fenômenos do humor
-          liderada pelo humorista Tirullipa e `Papai é Pop`, filme inspirado no
+          Fundada em 2018, a Galeria Distribuidora é uma empresa brasileira que
+          atua no desenvolvimento, produção e distribuição de longas-metragens e
+          séries nacionais. Inovação e dinamismo estão no DNA da Galeria, que
+          atua em parceria com as maiores produtoras do país desde o início de
+          cada projeto. Focada em conteúdos comerciais e com grande apelo junto
+          ao público, a empresa apresenta em seu catálogo filmes como{' '}
+          <em>'Detetive Madeinusa'</em>, comédia com fenômenos do humor liderada
+          pelo humorista Tirullipa; <em>'Papai é Pop'</em>, filme inspirado no
           livro homônimo de Marcos Piangers, estrelado por Lázaro Ramos ao lado
-          de Paolla Oliveira. Os próximos lançamentos da Galeria Distribuidora
-          são: `Vovó Ninja`, filme para toda a família com direção de Bruno
-          Barreto e protagonizado por Gloria Pires; `Fazendo Meu Filme`,
-          estrelado por Bela Fernandes; `Meninas Não Choram` com Letícia Braga e
-          Duda Matte; `Partiu América` protagonizado por Matheus Ceará; `Doce
-          Família` com Mariana Xavier e Viih Tube; e `Mãe Fora da Caixa` com Miá
+          de Paolla Oliveira; <em>'Fazendo Meu Filme'</em>, estrelado por Bela
+          Fernandes; <em>'Meninas Não Choram'</em> com Letícia Braga e Duda
+          Matte; e <em>'Partiu América'</em>, protagonizado por Matheus Ceará.
+          Os próximos lançamentos da Galeria Distribuidora são:{' '}
+          <em>'Vovó Ninja'</em>, filme para toda a família com direção de Bruno
+          Barreto e protagonizado por Gloria Pires; <em>'Doce Família'</em> com
+          Mariana Xavier e Viih Tube; e <em>'Mãe Fora da Caixa'</em> com Miá
           Mello. A Galeria Distribuidora é coprodutora e distribuidora de um
-          case inédito no mercado cinematográfico local: `A Meninas Que Matou Os
-          Pais e O Menino Que Matou Meus Pais`, dois longas com pontos de vista
-          diferentes sobre o caso von Richthofen. A trilogia sobre um dos crimes
-          que mais chocou o Brasil foi concluída com o lançamento de `A Menina
-          Que Matou Os Pais – A Confissão`.
+          case inédito no mercado cinematográfico local:{' '}
+          <em>'A Menina Que Matou Os Pais' e 'O Menino Que Matou Meus Pais'</em>
+          , dois longas com pontos de vista diferentes sobre o caso von
+          Richthofen. A trilogia sobre um dos crimes que mais chocou o Brasil
+          foi concluída com o lançamento de{' '}
+          <em>'A Menina Que Matou Os Pais – A Confissão'</em>.
         </p>
 
         <hr />
