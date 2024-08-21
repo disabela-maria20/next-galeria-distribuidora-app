@@ -25,9 +25,6 @@ export const metadata: Metadata = {
     }],
     type: 'website'
   },
-  alternates: {
-    canonical: 'http://galeriadistribuidora.com.br'
-  },
   category: 'Filmes',
 
 }
