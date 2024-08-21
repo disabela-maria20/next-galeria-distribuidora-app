@@ -25,12 +25,6 @@ export const metadata: Metadata = {
     }],
     type: 'website'
   },
-  twitter: {
-    title: 'Home | Galeria Distribuidora',
-    description: "Descubra os filmes mais recentes distribuídos pela Galeria Distribuidora Brasil. Confira os trailers, sinopses e datas de lançamento.",
-    site: 'https://galeriadistribuidora.com.br/',
-    images: '/img/share.png'
-  },
   alternates: {
     canonical: 'http://galeriadistribuidora.com.br'
   },
