@@ -132,6 +132,13 @@
 			width: 100%;
 			height: 700px;
 			object-fit: cover;
+
+			@include media(lg){
+				max-width: 1440px;
+				margin: 0 auto;
+				display: block;
+				height: 545px;
+			}
 		}
 
 		.title {
