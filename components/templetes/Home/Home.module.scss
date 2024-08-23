@@ -130,7 +130,8 @@
 
 		img {
 			width: 100%;
-			max-height: max(100%, 540px);
+			height: 700px;
+			object-fit: cover;
 		}
 
 		.title {

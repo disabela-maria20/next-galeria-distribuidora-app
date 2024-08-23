@@ -37,7 +37,7 @@ const Home = ({ banner, listaFilmes }: IHomeProps) => {
 
   const bannerSwiperOptions: SwiperOptions = {
     slidesPerView: 1,
-    loop: true,
+    loop: false,
     autoplay: {
       delay: 2500,
       disableOnInteraction: false
@@ -75,7 +75,6 @@ const Home = ({ banner, listaFilmes }: IHomeProps) => {
             <LazyLoadImage
               effect="blur"
               alt="banner"
-              sizes="(min-width: 480px) 90vw, (max-width: 1024px) 5vw"
               src={isMobile ? data.bannerMobile : data?.bannerDesktop}
               onClick={() => handleClickBanner(data)}
             />
