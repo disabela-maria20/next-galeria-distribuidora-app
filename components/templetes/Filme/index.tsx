@@ -87,7 +87,6 @@ const Filme = (data: IFilmeProps) => {
     formatMesmaSemana(filme?.releasedate) ||
     formatPassouUmaSemanaDesdeData(filme?.releasedate) ||
     filme?.hasSession
-
   const { formatarData } = useFormatarData()
   const { dataLayerFichafilme, dataLayerPlayTrailer, dataLayerMovieStream } =
     useGtag()
@@ -183,6 +182,8 @@ const Filme = (data: IFilmeProps) => {
   }
 
   const viewstreaming = (streaming: string) => {
+    if (filme.status == 'lancamento') return
+
     if (streaming == 'Netflix') {
       return (
         <>
@@ -260,7 +261,7 @@ const Filme = (data: IFilmeProps) => {
                     : formatarData(filme?.releasedate)}
                 </h2>
                 <div className={Style.areaBtnCompra}>
-                  {!isStreaming && emExibicao && !isMobile && (
+                  {isStreaming && emExibicao && !isMobile && (
                     <button
                       onClick={() => {
                         router.push('#sessao', { scroll: true })
