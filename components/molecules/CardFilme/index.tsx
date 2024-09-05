@@ -118,16 +118,29 @@ const CardFilme = ({
     }
   }
 
+  function formatDateToYYYYMMDD(date: Date) {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+
   const checkStatus = (status: string | undefined, data: IFilmeResponse) => {
     if (!status) return
 
     const statusKey = status as Status
     const statusCorrigido = statusCorrecoes[statusKey]
 
-    const dia = new Date(data.releasedate).getDate() + 1
+    const today = new Date()
+
+    const dia = new Date(data.releasedate).getDate()
     const mes = new Date(data.releasedate).getMonth() + 1
     const diaFormatado = dia < 10 ? `0${dia}` : dia
     const mesFormatado = mes < 10 ? `0${mes}` : mes
+
+    if (formatDateToYYYYMMDD(today) === data.releasedate) {
+      return 'Hoje nos Cimenas'
+    }
 
     if (statusCorrigido == 'Lançamento' && data.streaming.length == 0) {
       return `${diaFormatado}/${mesFormatado} nos cinemas`

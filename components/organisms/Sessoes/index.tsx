@@ -42,7 +42,7 @@ const Sessoes: React.FC<ISessoesProps> = ({ color, poster, filme }) => {
 
   const { dataLayerMovieTicket } = useGtag()
 
-  const { location, loading } = useLocationContext()
+  const { location, loading, locationArea } = useLocationContext()
 
   const calculateDistance = (lat2: number, lon2: number) => {
     const lat1 = location.latitude
@@ -180,14 +180,18 @@ const Sessoes: React.FC<ISessoesProps> = ({ color, poster, filme }) => {
 
   useEffect(() => {
     const getFilmeSessoes = async () => {
-      if (cities) {
-        const res = await getSession(filme.slug, cities)
+      try {
+        const res = await getSession(filme.slug, locationArea?.address.city)
+
         setSessoes(res)
+        setFilteredSessions([res])
+      } catch (e) {
+        return
       }
-      return
     }
     getFilmeSessoes()
-  }, [filme.slug, cities, location])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locationArea])
 
   return (
     <section className={Style.areaSessao}>

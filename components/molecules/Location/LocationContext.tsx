@@ -50,7 +50,6 @@ export const LocationProvider: React.FC<{ children: ReactNode }> = ({
     try {
       const loc = await requestLocationPermission()
       setLocation(loc)
-
       const res = await apiLocation(loc)
       setlocationArea(res)
     } catch (err) {
@@ -59,7 +58,6 @@ export const LocationProvider: React.FC<{ children: ReactNode }> = ({
       setLoading(false)
     }
   }
-
   useEffect(() => {
     refreshLocation()
     // eslint-disable-next-line react-hooks/exhaustive-deps
