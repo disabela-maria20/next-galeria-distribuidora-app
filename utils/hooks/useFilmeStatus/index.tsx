@@ -8,9 +8,9 @@ enum Status {
 }
 
 type IFilmeResponse = {
-  releasedate: string // Data de lançamento do filme
-  streaming: { platform: string }[] // Plataforma de streaming
-  hasSession: boolean // Se o filme está em cartaz no cinema
+  releasedate: string
+  streaming: { platform: string }[]
+  hasSession: boolean
 }
 
 const statusCorrecoes: Record<Status, string> = {
@@ -22,11 +22,12 @@ const statusCorrecoes: Record<Status, string> = {
   [Status.EMBREVE]: 'Em Breve'
 }
 
-// Função que tenta converter a string para o enum Status
 const parseStatus = (status: string | undefined): Status | undefined => {
   if (!status) return undefined
-  const upperStatus = status.toUpperCase() as keyof typeof Status
-  return Status[upperStatus] || undefined
+  const formattedStatus = status
+    .replace('-', '')
+    .toUpperCase() as keyof typeof Status
+  return Status[formattedStatus] || undefined
 }
 
 const formatDateToYYYYMMDD = (date: Date) => {
@@ -40,11 +41,9 @@ export const useFilmeStatus = (
   status: string | undefined,
   data: IFilmeResponse
 ) => {
-  // Calcular o parsedStatus diretamente
   const parsedStatus = parseStatus(status)
 
-  // Se parsedStatus for indefinido, retornar uma string vazia
-  if (!parsedStatus) return ''
+  if (!parsedStatus || !statusCorrecoes[parsedStatus]) return ''
 
   const statusCorrigido = statusCorrecoes[parsedStatus]
   const today = new Date()

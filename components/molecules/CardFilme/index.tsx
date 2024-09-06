@@ -13,7 +13,6 @@ import { Slide } from '../Slide'
 
 import { useFilmeStatus } from '@/utils/hooks/useFilmeStatus'
 import useFilmeTextStatus from '@/utils/hooks/useFilmeTextStatus'
-import { useFormatarData } from '@/utils/hooks/useFormatarData/formatarData'
 import useIsMobile from '@/utils/hooks/useIsMobile/isMobile'
 import { IFilmeResponse } from '@/utils/server/types'
 import { SwiperOptions } from 'swiper/types'
@@ -41,7 +40,7 @@ const CardFilme = ({
   const [open, setOpen] = useState<boolean>(false)
   const [iframe, setIframe] = useState<IFilmeResponse>()
 
-  const { formatarData } = useFormatarData()
+  // const { formatarData } = useFormatarData()
   const statusTextData = useFilmeTextStatus()
   const { isMobile } = useIsMobile()
 
@@ -133,10 +132,7 @@ const CardFilme = ({
                   <h3>{data.title}</h3>
                   {!data.hasSession ? (
                     <span className={Style.data}>
-                      Estreia:{' '}
-                      {data?.releasedate == '0000-00-00'
-                        ? 'A confirmar'
-                        : formatarData(data?.releasedate)}
+                      {useFilmeStatus(data.status, data)}
                     </span>
                   ) : (
                     <span className={Style.data}>{statusTextData(data)}</span>
