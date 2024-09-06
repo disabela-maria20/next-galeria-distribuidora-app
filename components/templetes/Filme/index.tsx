@@ -87,6 +87,7 @@ const Filme = (data: IFilmeProps) => {
     formatMesmaSemana(filme?.releasedate) ||
     formatPassouUmaSemanaDesdeData(filme?.releasedate) ||
     filme?.hasSession
+
   const { formatarData } = useFormatarData()
   const { dataLayerFichafilme, dataLayerPlayTrailer, dataLayerMovieStream } =
     useGtag()
@@ -135,25 +136,6 @@ const Filme = (data: IFilmeProps) => {
       }
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const swiperOptionsVideo: SwiperOptions = {
-    slidesPerView: 1,
-    spaceBetween: 10,
-    freeMode: true,
-    grabCursor: true,
-    // pagination: {
-    //   clickable: true
-    // },
-    pagination: false,
-    scrollbar: { hide: true },
-    modules: [FreeMode, Scrollbar],
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 20
-      }
-    }
-  }
 
   const Links = ({ youtube, insta }: { youtube: string; insta: string }) => {
     return (
@@ -182,8 +164,6 @@ const Filme = (data: IFilmeProps) => {
   }
 
   const viewstreaming = (streaming: string) => {
-    if (filme.status == 'lancamento') return
-
     if (streaming == 'Netflix') {
       return (
         <>
@@ -239,6 +219,8 @@ const Filme = (data: IFilmeProps) => {
     }
     return
   }
+  const isComprarIngresso = filme.streaming.length
+  const isLancamentoStreaming = isComprarIngresso == 0
 
   if (isLoading) return <Loading altura={true} />
 
@@ -261,15 +243,18 @@ const Filme = (data: IFilmeProps) => {
                     : formatarData(filme?.releasedate)}
                 </h2>
                 <div className={Style.areaBtnCompra}>
-                  {isStreaming && emExibicao && !isMobile && (
-                    <button
-                      onClick={() => {
-                        router.push('#sessao', { scroll: true })
-                      }}
-                    >
-                      COMPRAR INGRESSOS
-                    </button>
-                  )}
+                  {!isStreaming &&
+                    emExibicao &&
+                    !isMobile &&
+                    isLancamentoStreaming && (
+                      <button
+                        onClick={() => {
+                          router.push('#sessao', { scroll: true })
+                        }}
+                      >
+                        COMPRAR INGRESSOS
+                      </button>
+                    )}
                   {filme.streaming.length > 0 && !isMobile && (
                     <>
                       {filme.streaming.map((data) =>
@@ -310,16 +295,18 @@ const Filme = (data: IFilmeProps) => {
               />
             </div>
           )}
-          {emExibicao && isMobile && !isStreaming && (
+          {emExibicao && isMobile && !isStreaming && isLancamentoStreaming && (
             <div className={Style.areaBtnCompra}>
               <button onClick={() => router.push('#sessao', { scroll: true })}>
                 COMPRAR INGRESSOS
               </button>
             </div>
           )}
-          {filme.streaming.length > 0 && isMobile && (
-            <>{filme.streaming.map((data) => viewstreaming(data.platform))}</>
-          )}
+          <div className={Style.areaBtnCompra}>
+            {filme.streaming.length > 0 && isMobile && (
+              <>{filme.streaming.map((data) => viewstreaming(data.platform))}</>
+            )}
+          </div>
 
           {saibaMais && (
             <section className={Style.filmeSaibaMais}>

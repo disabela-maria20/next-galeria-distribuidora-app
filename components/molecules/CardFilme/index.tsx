@@ -138,8 +138,19 @@ const CardFilme = ({
     const diaFormatado = dia < 10 ? `0${dia}` : dia
     const mesFormatado = mes < 10 ? `0${mes}` : mes
 
-    if (formatDateToYYYYMMDD(today) === data.releasedate) {
+    if (
+      (formatDateToYYYYMMDD(today) === data.releasedate &&
+        data.streaming.length == 0) ||
+      data.hasSession
+    ) {
       return 'Hoje nos Cimenas'
+    }
+
+    if (
+      formatDateToYYYYMMDD(today) === data.releasedate &&
+      data.streaming.length != 0
+    ) {
+      return `Hoje na ${data.streaming[0].platform}`
     }
 
     if (statusCorrigido == 'Lançamento' && data.streaming.length == 0) {
