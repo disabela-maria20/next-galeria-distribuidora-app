@@ -20,6 +20,7 @@ import { IFilmeResponse, IFilmeResponseUrl } from '@/utils/server/types'
 import { SwiperOptions } from 'swiper/types'
 
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import { useFilmeStatus } from '@/utils/hooks/useFilmeStatus'
 interface IFilmeProps {
   movie: {
     movie: IFilmeResponse
@@ -222,6 +223,8 @@ const Filme = (data: IFilmeProps) => {
   const isComprarIngresso = filme.streaming.length
   const isLancamentoStreaming = isComprarIngresso == 0
 
+  console.log(!isStreaming && emExibicao && !isMobile && isLancamentoStreaming)
+
   if (isLoading) return <Loading altura={true} />
 
   return (
@@ -238,9 +241,7 @@ const Filme = (data: IFilmeProps) => {
               <h1 style={{ color: `${filme.slug}` }}>{filme?.title}</h1>
               <div className={Style.subTitle}>
                 <h2 className={Style.emExibicao}>
-                  {filme?.releasedate == '0000-00-00'
-                    ? 'A confirmar'
-                    : formatarData(filme?.releasedate)}
+                  {useFilmeStatus(filme?.status, filme)}
                 </h2>
                 <div className={Style.areaBtnCompra}>
                   {!isStreaming &&

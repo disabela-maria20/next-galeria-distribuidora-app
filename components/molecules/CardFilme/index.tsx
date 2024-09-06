@@ -11,12 +11,12 @@ import { Navigation, Pagination } from 'swiper/modules'
 import { Model } from '../Model'
 import { Slide } from '../Slide'
 
+import { useFilmeStatus } from '@/utils/hooks/useFilmeStatus'
 import useFilmeTextStatus from '@/utils/hooks/useFilmeTextStatus'
 import { useFormatarData } from '@/utils/hooks/useFormatarData/formatarData'
 import useIsMobile from '@/utils/hooks/useIsMobile/isMobile'
 import { IFilmeResponse } from '@/utils/server/types'
 import { SwiperOptions } from 'swiper/types'
-
 interface ICardFilmeProps {
   listaFilmes?: {
     releases: Array<IFilmeResponse>
@@ -29,24 +29,6 @@ interface ICardFilmeProps {
   data?: IFilmeResponse
 }
 type TSlide = 'streaming' | 'lancamento' | 'catalogo'
-
-enum Status {
-  LANCAMENTO = 'lancamento',
-  STREAMING = 'streaming',
-  INATIVO = 'inativo',
-  PRODUCAO = 'producao',
-  POSPRODUCAO = 'pos-producao',
-  EMBREVE = 'em-breve'
-}
-
-const statusCorrecoes: Record<Status, string> = {
-  [Status.LANCAMENTO]: 'Lançamento',
-  [Status.STREAMING]: 'Streaming',
-  [Status.INATIVO]: 'Inativo',
-  [Status.PRODUCAO]: 'Produção',
-  [Status.POSPRODUCAO]: 'Pós-Produção',
-  [Status.EMBREVE]: 'Em Breve'
-}
 
 import 'swiper/css/navigation'
 import 'react-lazy-load-image-component/src/effects/blur.css'
@@ -118,51 +100,6 @@ const CardFilme = ({
     }
   }
 
-  function formatDateToYYYYMMDD(date: Date) {
-    const year = date.getFullYear()
-    const month = String(date.getMonth() + 1).padStart(2, '0')
-    const day = String(date.getDate()).padStart(2, '0')
-    return `${year}-${month}-${day}`
-  }
-
-  const checkStatus = (status: string | undefined, data: IFilmeResponse) => {
-    if (!status) return
-
-    const statusKey = status as Status
-    const statusCorrigido = statusCorrecoes[statusKey]
-
-    const today = new Date()
-
-    const dia = new Date(data.releasedate).getDate() + 1
-    const mes = new Date(data.releasedate).getMonth() + 1
-    const diaFormatado = dia < 10 ? `0${dia}` : dia
-    const mesFormatado = mes < 10 ? `0${mes}` : mes
-
-    if (
-      (formatDateToYYYYMMDD(today) === data.releasedate &&
-        data.streaming.length == 0) ||
-      data.hasSession
-    ) {
-      return 'Hoje nos Cimenas'
-    }
-
-    if (
-      formatDateToYYYYMMDD(today) === data.releasedate &&
-      data.streaming.length != 0
-    ) {
-      return `Hoje na ${data.streaming[0].platform}`
-    }
-
-    if (statusCorrigido == 'Lançamento' && data.streaming.length == 0) {
-      return `${diaFormatado}/${mesFormatado} nos cinemas`
-    }
-
-    if (data.streaming.length > 0 && statusCorrigido == 'Lançamento') {
-      return `${diaFormatado}/${mesFormatado} na ${data.streaming[0].platform}`
-    }
-
-    return statusCorrigido
-  }
   if (slide == 'lancamento') {
     return (
       <>
@@ -190,7 +127,7 @@ const CardFilme = ({
                       className={Style.status}
                       style={{ background: `${data.color_status}` }}
                     >
-                      {checkStatus(data.status, data)}
+                      {useFilmeStatus(data.status, data)}
                     </span>
                   </Link>
                   <h3>{data.title}</h3>
@@ -261,7 +198,7 @@ const CardFilme = ({
                   className={Style.status}
                   style={{ background: `${data.color_status}` }}
                 >
-                  {checkStatus(data.status, data)}
+                  {useFilmeStatus(data.status, data)}
                 </span>
               </Link>
               <h3>{data.title}</h3>
@@ -279,7 +216,7 @@ const CardFilme = ({
             className={Style.status}
             style={{ background: `${data?.color_status}` }}
           >
-            {checkStatus(data?.status, data)}
+            {useFilmeStatus(data?.status, data)}
           </span>
         </Link>
         <h3>{data?.title}</h3>
