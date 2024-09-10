@@ -12,7 +12,7 @@ const RedesSociais: React.FC = () => {
       id: 1,
       name: 'Instagram',
       icone: <FaInstagram />,
-      link: 'https://www.instagram.com/galeriadistribuidora/'
+      link: 'https://www.instagram.com/mais_galeria/'
     },
     {
       id: 2,
