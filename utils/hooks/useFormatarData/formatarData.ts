@@ -96,10 +96,23 @@ export const useFormatarData = () => {
   }
 
   function formatfaltaUmaSemanaParaDataMarcada(dataString: string): boolean {
-    const dataAtual: Date = new Date(dataString)
-    const dataLimite: Date = new Date()
+    const dataMarcada: Date = new Date(dataString)
+    const dataAtual: Date = new Date()
 
-    return dataAtual > dataLimite
+    // Zera as horas, minutos, segundos e milissegundos para comparar apenas as datas
+    dataMarcada.setHours(0, 0, 0, 0)
+    dataAtual.setHours(0, 0, 0, 0)
+
+    // Calcula a diferença em milissegundos entre as datas
+    const diffEmMilissegundos: number =
+      dataMarcada.getTime() - dataAtual.getTime()
+
+    // Converte milissegundos para dias
+    const diffEmDias: number = Math.floor(
+      diffEmMilissegundos / (1000 * 60 * 60 * 24)
+    )
+
+    return diffEmDias >= 0 && diffEmDias <= 7
   }
 
   function formatPassouUmaSemanaDesdeData(dataString: string): boolean {

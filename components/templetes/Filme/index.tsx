@@ -20,7 +20,6 @@ import { IFilmeResponse, IFilmeResponseUrl } from '@/utils/server/types'
 import { SwiperOptions } from 'swiper/types'
 
 import 'react-lazy-load-image-component/src/effects/blur.css'
-import { useFilmeStatus } from '@/utils/hooks/useFilmeStatus'
 interface IFilmeProps {
   movie: {
     movie: IFilmeResponse
@@ -34,7 +33,7 @@ enum EStatus {
 }
 
 const classificacoesIndicativas = [
-  { idade: '0', cor: '#048f16' },
+  { idade: 'Livre', cor: '#048f16' },
   { idade: '10', cor: '#0281df' },
   { idade: '12', cor: '#f5d218' },
   { idade: '14', cor: '#f0850c' },
@@ -61,12 +60,19 @@ const Filme = (data: IFilmeProps) => {
   const filme = data.movie?.movie
   //const streaming = filme.streaming.map((data) => data.platform).join(',')
   const isStreaming = filme.status == EStatus.STREAMING
+  const {
+    formatMesmaSemana,
+    formatPassouUmaSemanaDesdeData,
+    formatfaltaUmaSemanaParaDataMarcada
+  } = useFormatarData()
 
   const [imageIndex, setImageIndex] = useState<number>(0)
   const [open, setOpen] = useState<boolean>(false)
   const [iframe, setIframe] = useState<string>()
   const [openModal, setOpenModal] = useState<boolean>(false)
-  const [saibaMais, setSaibaMais] = useState<boolean>(!filme.hasSession)
+  const [saibaMais, setSaibaMais] = useState<boolean>(
+    formatfaltaUmaSemanaParaDataMarcada(filme.releasedate) && filme.hasSession
+  )
 
   const handlePrevImage = () => {
     setImageIndex((prevIndex) =>
@@ -79,8 +85,6 @@ const Filme = (data: IFilmeProps) => {
       prevIndex === filme.images.length - 1 ? 0 : prevIndex + 1
     )
   }
-  const { formatMesmaSemana, formatPassouUmaSemanaDesdeData } =
-    useFormatarData()
 
   const { isMobile, isLoading } = useIsMobile()
   //const formatarData = useFormatarData()
@@ -137,6 +141,25 @@ const Filme = (data: IFilmeProps) => {
       }
     }
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const swiperOptionsVideo: SwiperOptions = {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    freeMode: true,
+    grabCursor: true,
+    // pagination: {
+    //   clickable: true
+    // },
+    pagination: false,
+    scrollbar: { hide: true },
+    modules: [FreeMode, Scrollbar],
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 20
+      }
+    }
+  }
 
   const Links = ({ youtube, insta }: { youtube: string; insta: string }) => {
     return (
@@ -163,67 +186,11 @@ const Filme = (data: IFilmeProps) => {
       </div>
     )
   }
-
-  const viewstreaming = (streaming: string) => {
-    if (streaming == 'Netflix') {
-      return (
-        <>
-          <button
-            onClick={() => {
-              dataLayerMovieStream(
-                filme.title,
-                filme.slug,
-                filme.originalTitle,
-                filme.genre,
-                filme.streaming.toString(),
-                Number(filme.idVibezzMovie)
-              )
-              window.location.href = 'https://www.netflix.com/'
-            }}
-          >
-            ASSISTA AGORA NO
-            <LazyLoadImage
-              src={`/img/streaming/${'netflix'}.png`}
-              // alt={service.toLowerCase()}
-              width="100"
-              effect="blur"
-            />
-          </button>
-        </>
-      )
-    }
-    if (streaming == 'Amazon Prime Video') {
-      return (
-        <>
-          <button
-            onClick={() => {
-              dataLayerMovieStream(
-                filme.title,
-                filme.slug,
-                filme.originalTitle,
-                filme.genre,
-                filme.streaming.toString(),
-                Number(filme.idVibezzMovie)
-              )
-            }}
-          >
-            ASSISTA AGORA NO
-            <LazyLoadImage
-              src={`/img/streaming/${'amazonprime'}.png`}
-              // alt={service.toLowerCase()}
-              width="100"
-              effect="blur"
-            />
-          </button>
-        </>
-      )
-    }
-    return
+  const setColor = (slug: string) => {
+    const colorTitle = ['guerracivil']
+    const color = colorTitle.includes(slug)
+    return color ? '#01fc30' : filme.color
   }
-  const isComprarIngresso = filme.streaming.length
-  const isLancamentoStreaming = isComprarIngresso == 0
-
-  console.log(!isStreaming && emExibicao && !isMobile && isLancamentoStreaming)
 
   if (isLoading) return <Loading altura={true} />
 
@@ -238,30 +205,45 @@ const Filme = (data: IFilmeProps) => {
         <div className={Style.bannerFilme}>
           <div className="container">
             <div className={Style.areaTituloBanner}>
-              <h1 style={{ color: `${filme.slug}` }}>{filme?.title}</h1>
+              <h1 style={{ color: `${setColor(filme.slug)}` }}>
+                {filme?.title}
+              </h1>
               <div className={Style.subTitle}>
                 <h2 className={Style.emExibicao}>
-                  {useFilmeStatus(filme?.status, filme)}
+                  {formatarData(filme.releasedate)}
                 </h2>
                 <div className={Style.areaBtnCompra}>
-                  {!isStreaming &&
-                    emExibicao &&
-                    !isMobile &&
-                    isLancamentoStreaming && (
-                      <button
-                        onClick={() => {
-                          router.push('#sessao', { scroll: true })
-                        }}
-                      >
-                        COMPRAR INGRESSOS
-                      </button>
-                    )}
+                  {!isStreaming && emExibicao && !isMobile && (
+                    <button
+                      onClick={() => {
+                        router.push('#sessao', { scroll: true })
+                      }}
+                    >
+                      COMPRAR INGRESSOS
+                    </button>
+                  )}
                   {filme.streaming.length > 0 && !isMobile && (
-                    <>
-                      {filme.streaming.map((data) =>
-                        viewstreaming(data.platform)
-                      )}
-                    </>
+                    <button
+                      onClick={() => {
+                        dataLayerMovieStream(
+                          filme.title,
+                          filme.slug,
+                          filme.originalTitle,
+                          filme.genre,
+                          filme.streaming.toString(),
+                          Number(filme.idVibezzMovie)
+                        )
+                        window.location.href = ' https://www.primevideo.com/'
+                      }}
+                    >
+                      ASSISTA AGORA NO
+                      <LazyLoadImage
+                        src={`/img/streaming/${'amazonprime'}.png`}
+                        // alt={service.toLowerCase()}
+                        width="100"
+                        effect="blur"
+                      />
+                    </button>
                   )}
                 </div>
               </div>
@@ -296,20 +278,37 @@ const Filme = (data: IFilmeProps) => {
               />
             </div>
           )}
-          {emExibicao && isMobile && !isStreaming && isLancamentoStreaming && (
+          {emExibicao && isMobile && !isStreaming && (
             <div className={Style.areaBtnCompra}>
               <button onClick={() => router.push('#sessao', { scroll: true })}>
                 COMPRAR INGRESSOS
               </button>
             </div>
           )}
-          <div className={Style.areaBtnCompra}>
-            {filme.streaming.length > 0 && isMobile && (
-              <>{filme.streaming.map((data) => viewstreaming(data.platform))}</>
-            )}
-          </div>
+          {filme.streaming.length > 0 && isMobile && (
+            <button
+              onClick={() => {
+                dataLayerMovieStream(
+                  filme.title,
+                  filme.slug,
+                  filme.originalTitle,
+                  filme.genre,
+                  filme.streaming.toString(),
+                  Number(filme.idVibezzMovie)
+                )
+              }}
+            >
+              ASSISTA AGORA NO
+              <LazyLoadImage
+                src={`/img/streaming/${'amazonprime'}.png`}
+                // alt={service.toLowerCase()}
+                width="100"
+                effect="blur"
+              />
+            </button>
+          )}
 
-          {saibaMais && (
+          {!saibaMais && (
             <section className={Style.filmeSaibaMais}>
               <div className={Style.areaPoster}>
                 <div className={Style.areaFlexPoster} id="saibamais">
@@ -336,7 +335,7 @@ const Filme = (data: IFilmeProps) => {
                             background: `${setDefinirCorClassificacaoIndicativa(filme?.age)}`
                           }}
                         >
-                          {filme.age == '0' ? 'L' : filme?.age}
+                          {filme?.age}
                         </span>
                       )}
 
@@ -365,9 +364,7 @@ const Filme = (data: IFilmeProps) => {
                       </li>
                       <li>
                         <strong>Data de Estreia:</strong>
-                        {filme?.releasedate == '0000-00-00'
-                          ? 'A confirmar'
-                          : formatarData(filme?.releasedate)}
+                        {formatarData(filme?.releasedate)}
                       </li>
                     </ul>
                   </div>
@@ -393,7 +390,7 @@ const Filme = (data: IFilmeProps) => {
                     >
                       <iframe
                         className={Style.embedResponsiveItem}
-                        src={`${data.url}?enablejsapi=1&origin=galeriadistribuidora.com.br`}
+                        src={`${data.url}?enablejsapi=1&origin=diamondfilms.com.br`}
                         title="YouTube video player"
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
