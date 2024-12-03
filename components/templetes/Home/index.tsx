@@ -28,6 +28,7 @@ interface IHomeProps {
     coming_soon: Array<IFilmeResponse>
     in_production: Array<IFilmeResponse>
     post_production: Array<IFilmeResponse>
+    streaming_coming_soon: Array<IFilmeResponse>
   }
 }
 

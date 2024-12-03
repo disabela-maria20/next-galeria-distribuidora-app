@@ -17,6 +17,7 @@ interface ICatalogoProps {
     coming_soon: Array<IFilmeResponse>
     in_production: Array<IFilmeResponse>
     post_production: Array<IFilmeResponse>
+    streaming_coming_soon: Array<IFilmeResponse>
   }
 }
 
@@ -32,7 +33,8 @@ const Catalogo: React.FC<ICatalogoProps> = ({ listaFilmes }) => {
       listaFilmes.coming_soon,
       listaFilmes.in_production,
       listaFilmes.post_production,
-      listaFilmes.streaming
+      listaFilmes.streaming,
+      listaFilmes?.streaming_coming_soon
     )
   }, [listaFilmes])
 

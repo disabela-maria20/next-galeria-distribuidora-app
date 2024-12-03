@@ -23,6 +23,8 @@ interface ICardFilmeProps {
     coming_soon: Array<IFilmeResponse>
     in_production: Array<IFilmeResponse>
     post_production: Array<IFilmeResponse>
+    streaming_coming_soon: Array<IFilmeResponse>
+
   }
   slide?: TSlide
   data?: IFilmeResponse
@@ -47,7 +49,8 @@ const CardFilme = ({
   const filmes = listaFilmes?.releases.concat(
     ...listaFilmes.coming_soon,
     ...listaFilmes.in_production,
-    ...listaFilmes.post_production
+    ...listaFilmes.post_production,
+    ...listaFilmes.streaming_coming_soon
   )
 
   function handleVerImagem(data: IFilmeResponse) {
