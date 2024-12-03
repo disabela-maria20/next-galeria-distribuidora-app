@@ -127,7 +127,7 @@ const CardFilme = ({
                     />
                     <span
                       className={Style.status}
-                      style={{ background: `${data.color_status}` }}
+                      style={{ background: `${data.color_status != '' ? data.color_status : '#000'}` }}
                     >
                       {useFilmeStatus(data.status, data)}
                     </span>

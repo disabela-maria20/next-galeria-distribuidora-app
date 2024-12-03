@@ -36,6 +36,9 @@ const Home = ({ banner, listaFilmes }: IHomeProps) => {
   const { dataLayerHome, dataLayerBannerClick } = useGtag()
   const { isMobile, isLoading } = useIsMobile()
 
+  console.log(listaFilmes);
+  
+
   const bannerSwiperOptions: SwiperOptions = {
     slidesPerView: 1,
     loop: false,

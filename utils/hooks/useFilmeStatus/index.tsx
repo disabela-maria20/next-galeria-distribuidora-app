@@ -8,6 +8,7 @@ enum Status {
   PRODUCAO = 'producao',
   POSPRODUCAO = 'pos-producao',
   EMBREVE = 'em-breve',
+  STREAMINGEMBREVE = 'streaming-em-breve'
 }
 
 const statusCorrecoes: Record<Status, string> = {
@@ -17,11 +18,13 @@ const statusCorrecoes: Record<Status, string> = {
   [Status.PRODUCAO]: 'Produção',
   [Status.POSPRODUCAO]: 'Pós-Produção',
   [Status.EMBREVE]: 'Em Breve',
+  [Status.STREAMINGEMBREVE]: 'Em breve em Streaming'
 };
 
 const parseStatus = (status: string | undefined): Status | undefined => {
   if (!status) return undefined;
-  const formattedStatus = status.replace('-', '').toUpperCase() as keyof typeof Status;
+  
+  const formattedStatus = status.replace(/-/g, '').toUpperCase() as keyof typeof Status;
   return Status[formattedStatus] || undefined;
 };
 
@@ -37,18 +40,19 @@ export const useFilmeStatus = (
   data: IFilmeResponse
 ): string => {
   return useMemo(() => {
-    if (data.title == 'Fé Para o Impossível' && data.releasedate == "0000-00-00") return 'Fevereiro nos cinemas'
-
     const parsedStatus = parseStatus(status);
     if (!parsedStatus || !statusCorrecoes[parsedStatus]) return '';
 
     const statusCorrigido = statusCorrecoes[parsedStatus];
     const today = new Date();
 
-    // Formata a data de lançamento
     const releaseDate = new Date(data.releasedate);
     const dia = String(releaseDate.getDate()).padStart(2, '0');
     const mes = String(releaseDate.getMonth() + 1).padStart(2, '0');
+
+    if(statusCorrigido === 'Lançamento' && data.title == 'Fé Para o Impossível' && data.releasedate == "0000-00-00" ){
+      return 'Fevereiro nos Cinemas'
+    }
 
     if (
       (formatDateToYYYYMMDD(today) === data.releasedate && data.streaming.length === 0) ||
@@ -71,8 +75,6 @@ export const useFilmeStatus = (
     if (data.streaming.length > 0 && statusCorrigido === 'Lançamento') {
       return `${dia}/${mes} na ${data.streaming[0].platform}`;
     }
-
-
 
     return statusCorrigido;
   }, [status, data]);
