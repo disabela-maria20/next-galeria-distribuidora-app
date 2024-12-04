@@ -48,7 +48,8 @@ export async function generateStaticParams() {
     ...posts.coming_soon,
     ...posts.in_production,
     ...posts.post_production,
-    ...posts.streaming
+    ...posts.streaming,
+    ...posts.streaming_coming_soon
   ]
 
   const lancamento: ICatalogoFilmeProps[] = concatFilmes.map((post) => ({
