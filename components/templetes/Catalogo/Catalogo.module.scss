@@ -1,144 +1,143 @@
 .catalogo {
-	color: $primary-lingh-color;
-	margin-bottom: 35px;
-  @include media(lg){
+  color: $primary-lingh-color;
+  margin-bottom: 35px;
+  @include media(lg) {
     padding: 0;
     margin-bottom: 90px;
   }
-	h1 {
-		font-size: 3.5rem;
-		padding-top: 130px;
-		padding-bottom: 40px;
-		margin: 0;
+  h1 {
+    font-size: 3.5rem;
+    padding-top: 130px;
+    padding-bottom: 40px;
+    margin: 0;
 
-		@include media(lg) {
-			font-size: 4.1rem;
-		}
-	}
+    @include media(lg) {
+      font-size: 4.1rem;
+    }
+  }
 
-	.areaTitleCatalogoFilmeAno {
-		display: flex;
+  .areaTitleCatalogoFilmeAno {
+    display: flex;
 
-		flex-direction: column;
-		margin: 45px 0;
-		position: relative;
-		
-		@include media(lg) {
-			align-items: flex-end;
-			justify-content: space-between;
-			flex-direction: row;
-		}
+    flex-direction: column;
+    margin: 45px 0;
+    position: relative;
 
-		h2 {
-			font-size: 2.5rem;
+    @include media(lg) {
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-direction: row;
+    }
 
-			@include media(lg) {
-				font-size: 3.1rem;
-			}
-		}
+    h2 {
+      font-size: 2.5rem;
 
-		span {
-			margin-bottom: 10px;
-			font-weight: 400;
-			font-size: 1.4rem;
-			line-height: 1.4;
-			display: block;
-			margin-top: 15px;
+      @include media(lg) {
+        font-size: 3.1rem;
+      }
+    }
 
-			@include media(lg) {
-				&:before {
-					content: '';
-					position: absolute;
-					bottom: 0;
-					width: 100%;
-					left: 0;
-					height: 1px;
-					background-color: $primary-lingh-color;
-				}
-			}
+    span {
+      margin-bottom: 10px;
+      font-weight: 400;
+      font-size: 1.4rem;
+      line-height: 1.4;
+      display: block;
+      margin-top: 15px;
 
-		}
-	}
+      @include media(lg) {
+        &:before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          left: 0;
+          height: 1px;
+          background-color: $primary-lingh-color;
+        }
+      }
+    }
+  }
 
-	.gridCatalogo {
-		display: grid;
-		gap: 20px;
-		max-width: 720px;
+  .gridCatalogo {
+    display: grid;
+    gap: 20px;
+    max-width: 720px;
 
-		@include media(lg) {
-			grid-template-columns: repeat(3, 1fr);
-		}
+    @include media(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
 
-		select,
-		input {
-			@include inputCaralogo();
-		}
+    select,
+    input {
+      @include inputCaralogo();
+    }
 
-		.areaPesquisarCatalogo {
-			display: inline-flex;
+    .areaPesquisarCatalogo {
+      display: inline-flex;
 
-			button {
-				color: $primary-dark-color;
-				background-color: $primary-lingh-color;
-				border: 1px solid $primary-lingh-color;
-				padding: 0px 10px;
+      button {
+        color: $primary-dark-color;
+        background-color: $primary-lingh-color;
+        border: 1px solid $primary-lingh-color;
+        padding: 0px 10px;
 
-				svg {
-					font-size: 1.6rem;
-				}
-			}
-		}
-	}
+        svg {
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
 
-	.gridFiltroAlfabeto {
-		display: flex;
-		flex-flow: wrap;
-		justify-content: center;
-		gap: 10px;
-		padding-top: 40px;
+  .gridFiltroAlfabeto {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 40px;
 
-		@include media(lg) {
-			justify-content: start;
-		}
+    @include media(lg) {
+      justify-content: start;
+    }
 
-		button {
-			border: none;
-			background-color: $primary-dark-color;
-			color: $primary-lingh-color;
-			padding: 10px 15px;
-			font-size: 1.4rem;
-		}
-	}
+    button {
+      border: none;
+      background-color: $primary-dark-color;
+      color: $primary-lingh-color;
+      padding: 10px 15px;
+      font-size: 1.4rem;
+    }
+  }
 
-	.gridFilmesCatalogo {
-		margin-top: 35px;
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 20px;
+  .gridFilmesCatalogo {
+    margin-top: 35px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 
-		@include media(sm) {
-			grid-template-columns: repeat(3, 1fr);
-		}
+    @include media(sm) {
+      grid-template-columns: repeat(3, 1fr);
+    }
 
-		@include media(md) {
-			grid-template-columns: repeat(4, 1fr);
-		}
+    @include media(md) {
+      grid-template-columns: repeat(4, 1fr);
+    }
 
-		@include media(lg) {
-			grid-template-columns: repeat(5, 1fr);
-		}
+    @include media(lg) {
+      grid-template-columns: repeat(5, 1fr);
+    }
 
-		a {
-			h2 {
-				color: $primary-lingh-color;
-				padding: 10px 0;
-			}
-		}
-	}
+    a {
+      h2 {
+        color: $primary-lingh-color;
+        padding: 10px 0;
+      }
+    }
+  }
 
-	.CatalogoVazio{
-		font-size: 1.6rem;
-		line-height: 2.6rem;
-		margin: 20px 0;
-	}
+  .CatalogoVazio {
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+    margin: 20px 0;
+  }
 }

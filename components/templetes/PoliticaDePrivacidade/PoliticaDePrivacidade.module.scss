@@ -1,29 +1,29 @@
-.politicaDePrivacidade{
-	color: $primary-lingh-color;
+.politicaDePrivacidade {
+  color: $primary-lingh-color;
 
-	h1{
-		font-size: 3.1rem;
-		padding-top: 160px;
-		@include media(lg){
-			padding-top: 200px;
-			font-size: 4.1rem;
-		}
-	}
-	h2{
-		font-size: 2.5rem;
-		margin: 20px 0;
-		@include media(lg){
-			font-size: 3.1rem;
-		}
-	}
-	a{
-		color: $primary-lingh-color;
-		padding: 0 5px;
-		text-decoration: underline;
-	}
-	p{
-		font-size: 1.6rem;
-		line-height: 2.6rem;
-		margin: 20px 0;
-	}
+  h1 {
+    font-size: 3.1rem;
+    padding-top: 160px;
+    @include media(lg) {
+      padding-top: 200px;
+      font-size: 4.1rem;
+    }
+  }
+  h2 {
+    font-size: 2.5rem;
+    margin: 20px 0;
+    @include media(lg) {
+      font-size: 3.1rem;
+    }
+  }
+  a {
+    color: $primary-lingh-color;
+    padding: 0 5px;
+    text-decoration: underline;
+  }
+  p {
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+    margin: 20px 0;
+  }
 }

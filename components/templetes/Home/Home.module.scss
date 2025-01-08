@@ -1,171 +1,175 @@
 .areaSlideFilmes {
-	margin-bottom: 35px;
-  @include media(lg){
+  margin-bottom: 35px;
+  @include media(lg) {
     padding: 0;
     margin-bottom: 90px;
   }
-	.slideTitle {
-		font-size: 2.5rem;
-		padding: 25px 0;
-		margin-top: 30px;
-		font-weight: 900;
-		color: $primary-lingh-color;
+  .slideTitle {
+    font-size: 2.5rem;
+    padding: 25px 0;
+    margin-top: 30px;
+    font-weight: 900;
+    color: $primary-lingh-color;
 
-		@include media(lg) {
-			font-size: 4.1rem;
-		}
+    @include media(lg) {
+      font-size: 4.1rem;
+    }
 
-		span {
-			font-weight: 400;
-			font-size: 1.4rem;
-			line-height: 1.4;
-			display: block;
-			margin-top: 15px;
+    span {
+      font-weight: 400;
+      font-size: 1.4rem;
+      line-height: 1.4;
+      display: block;
+      margin-top: 15px;
 
-			@include media(md) {
-				display: inline;
-				margin-left: 25px;
-			}
-		}
+      @include media(md) {
+        display: inline;
+        margin-left: 25px;
+      }
+    }
+  }
 
-	}
+  .slideFilmehomePromo {
+    overflow: visible;
+    position: relative;
 
-	.slideFilmehomePromo {
-		overflow: visible;
-		position: relative;
+    img {
+      width: 100%;
+    }
 
-		img {
-			width: 100%;
-		}
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -30px;
+      z-index: 99;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(
+        270deg,
+        rgb(0, 0, 0),
+        rgba(0, 0, 0, 0) 15%
+      );
+      pointer-events: none;
+    }
+  }
 
-		&::after {
-			content: "";
-			position: absolute;
-			top: 0;
-			right: -30px;
-			z-index: 99;
-			width: 100%;
-			height: 100%;
-			background-image: linear-gradient(270deg, rgb(0, 0, 0), rgba(0, 0, 0, 0) 15%);
-			pointer-events: none;
-		}
-	}
+  .filme {
+    color: $primary-lingh-color;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
 
-	.filme {
-		color: $primary-lingh-color;
-		width: auto;
-		height: auto;
-		max-width: 100%;
-		max-height: 100%;
+    .data {
+      font-size: 1.4rem;
+      display: block;
+    }
 
-		.data {
-			font-size: 1.4rem;
-			display: block;
-		}
+    h2 {
+      margin: 5px 0;
+      font-size: 1.4rem;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      color: $primary-lingh-color;
 
-		h2 {
-			margin: 5px 0;
-			font-size: 1.4rem;
-			height: 35px;
-			display: flex;
-			align-items: center;
-			color: $primary-lingh-color;
+      @include media(md) {
+        height: 30px;
+      }
+    }
 
-			@include media(md) {
-				height: 30px;
-			}
-		}
+    img {
+      width: 100%;
+      height: 100%;
+      max-height: min(100%, 200px);
+    }
 
-		img {
-			width: 100%;
-			height: 100%;
-			max-height: min(100%, 200px);
-		}
+    p {
+      font-size: 1rem !important;
+      margin-top: 10px;
+      margin-bottom: 10px !important;
+    }
 
-		p {
-			font-size: 1rem !important;
-			margin-top: 10px;
-			margin-bottom: 10px !important
-		}
+    .tralher {
+      border: 1px solid $primary-lingh-color;
+      color: $primary-lingh-color;
+      font-weight: 700;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 3px;
+      margin-top: 10px;
+      cursor: pointer;
 
-		.tralher {
-			border: 1px solid $primary-lingh-color;
-			color: $primary-lingh-color;
-			font-weight: 700;
-			border-radius: 5px;
-			display: inline-flex;
-			align-items: center;
-			gap: 10px;
-			padding: 3px;
-			margin-top: 10px;
-			cursor: pointer;
+      span {
+        font-size: 1.4rem;
+        color: $primary-lingh-color;
+      }
 
-			span {
-				font-size: 1.4rem;
-				color: $primary-lingh-color;
-			}
+      svg {
+        font-size: 1.8rem;
+        color: #e52d27;
+      }
+    }
+  }
 
-			svg {
-				font-size: 1.8rem;
-				color: #E52D27;
-			}
-		}
-	}
-
-	.streaming {
-		border: 1px solid $primary-lingh-color;
-		color: $primary-lingh-color;
-		font-size: 1.2rem;
-		font-weight: 400;
-		padding: 5px;
-		border-radius: 5px;
-		margin-top: 10px;
-		display: inline-block;
-	}
+  .streaming {
+    border: 1px solid $primary-lingh-color;
+    color: $primary-lingh-color;
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: inline-block;
+  }
 }
 
 .slideBanner {
-	.areaBanner {
-		position: relative;
+  .areaBanner {
+    position: relative;
 
-		img {
-			width: 100%;
-			max-height: max(100%, 540px);
-		}
+    img {
+      width: 100%;
+      max-height: max(100%, 540px);
+    }
 
-		.title {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			margin: 25px 0;
-			font-weight: 700;
-			font-size: 4.5rem;
-			text-align: center;
-			text-shadow: 2px 2px 4px #1b1b1b81, 2px -1px 4px #18181860;
-			@include media(lg) {
-				font-size: 5.5rem;
-				text-align: left;
-				left: initial;
-			}
-		}
-	}
-
+    .title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      margin: 25px 0;
+      font-weight: 700;
+      font-size: 4.5rem;
+      text-align: center;
+      text-shadow:
+        2px 2px 4px #1b1b1b81,
+        2px -1px 4px #18181860;
+      @include media(lg) {
+        font-size: 5.5rem;
+        text-align: left;
+        left: initial;
+      }
+    }
+  }
 }
 
 .ModaliframeVideoYoutube {
-	max-width: 980px !important;
+  max-width: 980px !important;
 
-	.iframeVideoYoutube {
-		.embedResponsiveItem {
-			@include media(sm) {
-				width: 500px;
-				height: 400px;
-			}
+  .iframeVideoYoutube {
+    .embedResponsiveItem {
+      @include media(sm) {
+        width: 500px;
+        height: 400px;
+      }
 
-			@include media(xl) {
-				width: 900px;
-				height: 500px;
-			}
-		}
-	}
+      @include media(xl) {
+        width: 900px;
+        height: 500px;
+      }
+    }
+  }
 }

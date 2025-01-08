@@ -3,7 +3,7 @@
   color: $primary-lingh-color;
   padding: 20px 0;
   margin-top: 35px;
-  @include media(lg){
+  @include media(lg) {
     padding: 0;
     margin-top: 90px;
   }
@@ -13,9 +13,8 @@
     grid-template-rows: repeat(2, auto);
     grid-column-gap: 30px;
     grid-row-gap: 20px;
-  
-    align-items: center;
 
+    align-items: center;
 
     @include media(xl) {
       grid-template-columns: repeat(5, auto);
@@ -42,7 +41,6 @@
       @include media(xl) {
         grid-area: initial;
       }
-
 
       font-size: 1.2rem;
 
@@ -78,7 +76,6 @@
         gap: 15px;
 
         li {
-
           a {
             text-transform: capitalize;
             font-size: 1.2rem;
@@ -137,5 +134,4 @@
       }
     }
   }
-
 }

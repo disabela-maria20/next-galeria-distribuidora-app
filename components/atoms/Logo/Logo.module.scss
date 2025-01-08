@@ -1,11 +1,11 @@
-.logo{
+.logo {
   max-width: 100px;
   object-fit: cover;
   padding-top: 5px;
-  @include media('sm'){
+  @include media('sm') {
     max-width: 100%;
   }
-  @include media(xxl){
+  @include media(xxl) {
     width: 140px;
   }
 }

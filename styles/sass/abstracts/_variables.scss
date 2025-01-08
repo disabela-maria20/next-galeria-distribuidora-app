@@ -1,12 +1,11 @@
-$primary-lingh-color: #FFF;
+$primary-lingh-color: #fff;
 $secondary-lingh-color: #fdfeff;
 
 $primary-color-gray: #242424;
 $primary-dark-color: #000;
 
 $secondary-colors: #012d5a;
-$tertiary-colors: #E52D27, #BF171D;
-
+$tertiary-colors: #e52d27, #bf171d;
 
 // Breakpoints
 $grid-breakpoints: (
@@ -15,7 +14,7 @@ $grid-breakpoints: (
   md: 768px,
   lg: 992px,
   xl: 1200px,
-  xxl: 1440px,
+  xxl: 1440px
 );
 
 $font-family: 'Gantari';

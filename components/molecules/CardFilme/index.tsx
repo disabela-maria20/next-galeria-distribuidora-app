@@ -24,7 +24,6 @@ interface ICardFilmeProps {
     in_production: Array<IFilmeResponse>
     post_production: Array<IFilmeResponse>
     streaming_coming_soon: Array<IFilmeResponse>
-
   }
   slide?: TSlide
   data?: IFilmeResponse
@@ -127,7 +126,9 @@ const CardFilme = ({
                     />
                     <span
                       className={Style.status}
-                      style={{ background: `${data.color_status != '' ? data.color_status : '#000'}` }}
+                      style={{
+                        background: `${data.color_status != '' ? data.color_status : '#000'}`
+                      }}
                     >
                       {useFilmeStatus(data.status, data)}
                     </span>

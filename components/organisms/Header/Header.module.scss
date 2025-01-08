@@ -1,17 +1,21 @@
 .bg_header {
-	background:linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 100%);
-	// background-repeat: no-repeat;
-	// background-size: cover;
-	// background-position-x: center;
-	// background-position-y: top;
-	transition: all 400ms;
-	position: absolute;
-	width: 100%;
-	margin: 0 auto;
-	z-index: 9999;
-	
-	&.active{
-		position: fixed;
-		background-color: $primary-dark-color;
-	}
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // background-position-x: center;
+  // background-position-y: top;
+  transition: all 400ms;
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 9999;
+
+  &.active {
+    position: fixed;
+    background-color: $primary-dark-color;
+  }
 }

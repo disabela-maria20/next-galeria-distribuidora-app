@@ -15,8 +15,6 @@
       grid-template-columns: repeat(2, 1fr);
     }
 
-
-
     h1,
     h2 {
       font-size: 3.1rem;
@@ -75,10 +73,9 @@
         }
       }
 
-      input[type="text"] {
+      input[type='text'] {
         margin-top: 20px;
         @include inputNewsletter;
-
       }
 
       textarea {
@@ -87,7 +84,7 @@
         height: 250px !important;
       }
 
-      input[type="checkbox"] {
+      input[type='checkbox'] {
         width: 25px;
         height: 25px;
       }
@@ -100,7 +97,8 @@
         font-weight: 700;
       }
 
-      label, .areaLabel {
+      label,
+      .areaLabel {
         position: relative;
 
         small {
@@ -108,7 +106,7 @@
           left: 0;
           bottom: -15px;
           font-size: 1.1rem;
-          color: #E52D27;
+          color: #e52d27;
         }
       }
     }
@@ -149,72 +147,70 @@
   }
 }
 .newsletterPopUpTermos {
+  label,
+  a,
+  p {
+    font-size: 1.4rem;
+    color: $primary-lingh-color;
+  }
 
-	label,
-	a,
-	p {
-		font-size: 1.4rem;
-		color: $primary-lingh-color;
-	}
+  a {
+    text-decoration: underline;
+  }
 
-	a {
-		text-decoration: underline;
-	}
-
-	label {
-		display: inline-flex;
-		align-items: center;
-		gap: 10px;
-	}
-
+  label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
 }
 
 .newsletterPopUpTermosFlex {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
 
-	p {
-		font-size: 1.2rem;
-	}
+  p {
+    font-size: 1.2rem;
+  }
 
-	a {
-		text-decoration: underline;
-		color: $primary-lingh-color;
-	}
+  a {
+    text-decoration: underline;
+    color: $primary-lingh-color;
+  }
 
-	input[type="checkbox"] {
-		width: 25px;
-		height: 25px;
-	}
+  input[type='checkbox'] {
+    width: 25px;
+    height: 25px;
+  }
 
-	position: relative;
+  position: relative;
 
-	small {
-		position: absolute;
-		left: 0;
-		bottom: -20px;
-		font-size: 1.1rem;
+  small {
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    font-size: 1.1rem;
 
-		color: #E52D27;
-	}
+    color: #e52d27;
+  }
 
-	button {
-		background-color: $secondary-colors;
-		border: none;
-		color: $primary-lingh-color;
-		padding: 10px 20px;
-		border-radius: 50px;
-		font-size: 1.4rem;
-		text-transform: uppercase;
-		position: relative;
-		left: 1px;
-		cursor: pointer;
-		transition: all 0.5s;
+  button {
+    background-color: $secondary-colors;
+    border: none;
+    color: $primary-lingh-color;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    position: relative;
+    left: 1px;
+    cursor: pointer;
+    transition: all 0.5s;
 
-		&:hover {
-			background-color: darken($secondary-colors, 10%);
-		}
-	}
+    &:hover {
+      background-color: darken($secondary-colors, 10%);
+    }
+  }
 }

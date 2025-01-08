@@ -1,62 +1,62 @@
 .ComprarIngresso {
-	h1 {
-		color: $primary-lingh-color;
-		font-size: 3.1rem;
-		padding-top: 160px;
+  h1 {
+    color: $primary-lingh-color;
+    font-size: 3.1rem;
+    padding-top: 160px;
 
-		@include media(lg) {
-			padding-top: 40px;
-			font-size: 4.1rem;
-		}
+    @include media(lg) {
+      padding-top: 40px;
+      font-size: 4.1rem;
+    }
 
-		span {
-			color: $primary-lingh-color;
-			font-weight: 400;
-			font-size: 1.4rem;
-			line-height: 1.4;
-			display: block;
-			margin-top: 15px;
+    span {
+      color: $primary-lingh-color;
+      font-weight: 400;
+      font-size: 1.4rem;
+      line-height: 1.4;
+      display: block;
+      margin-top: 15px;
 
-			@include media(md) {
-				display: inline;
-				margin-left: 25px;
-			}
-		}
-	}
+      @include media(md) {
+        display: inline;
+        margin-left: 25px;
+      }
+    }
+  }
 
-	h2 {
-		color: $primary-lingh-color;
-		font-size: 2.5rem;
-		margin: 20px 0;
+  h2 {
+    color: $primary-lingh-color;
+    font-size: 2.5rem;
+    margin: 20px 0;
 
-		@include media(lg) {
-			font-size: 3.1rem;
-		}
-	}
+    @include media(lg) {
+      font-size: 3.1rem;
+    }
+  }
 
-	p {
-		color: $primary-lingh-color;
-		font-size: 1.4rem;
-		padding-top: 140px;
+  p {
+    color: $primary-lingh-color;
+    font-size: 1.4rem;
+    padding-top: 140px;
 
-		@include media(lg) {
-			padding: 35px 0;
-		}
-	}
+    @include media(lg) {
+      padding: 35px 0;
+    }
+  }
 }
 
 .slideBanner {
-	@include media(lg) {
-		img {
-			width: 1450px;
-			max-height: 540px;
-			max-width: 100%;
-			margin: 0 auto;
-			display: block;
-		}
-	}
+  @include media(lg) {
+    img {
+      width: 1450px;
+      max-height: 540px;
+      max-width: 100%;
+      margin: 0 auto;
+      display: block;
+    }
+  }
 }
 
-.itemSessao{
-	padding: 35px 0;
+.itemSessao {
+  padding: 35px 0;
 }

@@ -1,64 +1,63 @@
 .btnPesquisar {
-	background-color: transparent !important;
-	border: 0;
-	position: relative;
-	svg {
-		color: $primary-lingh-color;
-		font-size: 31px;
-	}
+  background-color: transparent !important;
+  border: 0;
+  position: relative;
+  svg {
+    color: $primary-lingh-color;
+    font-size: 31px;
+  }
 
-	@include media(xl) {
-		display: none;
-	}
+  @include media(xl) {
+    display: none;
+  }
 }
 
 .formInputSearch {
-	display: none;
+  display: none;
 
-	@include media(xl) {
-		display: block;
-	}
+  @include media(xl) {
+    display: block;
+  }
 }
 
 .InputSearch {
-	display: flex;
-	input {
-		border: 1px solid $primary-lingh-color;
-		color: $primary-lingh-color;
-		border-right: none;
-		background-color: rgba(36, 36, 36, 0.27);
-		font-weight: 400;
-		font-size: 1.8rem;
-		width: 100%;
-		border-radius: 0;
-		height: 40px;
-		padding-left: 5px;
+  display: flex;
+  input {
+    border: 1px solid $primary-lingh-color;
+    color: $primary-lingh-color;
+    border-right: none;
+    background-color: rgba(36, 36, 36, 0.27);
+    font-weight: 400;
+    font-size: 1.8rem;
+    width: 100%;
+    border-radius: 0;
+    height: 40px;
+    padding-left: 5px;
 
-		&::placeholder {
-			color: $primary-lingh-color;
-			font-size: 1.8rem;
-			font-weight: 400;
-			padding-left: 5px;
-		}
-	}
+    &::placeholder {
+      color: $primary-lingh-color;
+      font-size: 1.8rem;
+      font-weight: 400;
+      padding-left: 5px;
+    }
+  }
 
-	button {
-		border: 1px solid $primary-lingh-color;
-		border-left: none;
-		background-color: rgba(36, 36, 36, 0.27);
-		padding: 0;
-		padding-right: 5px;
+  button {
+    border: 1px solid $primary-lingh-color;
+    border-left: none;
+    background-color: rgba(36, 36, 36, 0.27);
+    padding: 0;
+    padding-right: 5px;
 
-		svg {
-			color: $primary-lingh-color;
-			font-size: 31px;
-		}
-	}
-
+    svg {
+      color: $primary-lingh-color;
+      font-size: 31px;
+    }
+  }
 }
 
-.popUpformInputSearch{
-	position: absolute;
-	width: 100%;
-	top: 100px;
+.popUpformInputSearch {
+  position: absolute;
+  width: 100%;
+  top: 100px;
 }

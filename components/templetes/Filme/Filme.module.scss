@@ -1,529 +1,516 @@
 .areaFilme {
-	overflow-y: hidden;
-	position: relative;
+  overflow-y: hidden;
+  position: relative;
 }
 
 .areaBtn {
-	@include flex-center();
-	gap: 20px;
-	flex-direction: column;
+  @include flex-center();
+  gap: 20px;
+  flex-direction: column;
 
-	@include media(sm) {
-		flex-direction: row;
-	}
+  @include media(sm) {
+    flex-direction: row;
+  }
 
-	button {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		font-size: 1.2rem !important;
+  button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem !important;
 
-		@include media(sm) {
-			gap: 20px;
-			font-size: 1.4rem !important;
-		}
+    @include media(sm) {
+      gap: 20px;
+      font-size: 1.4rem !important;
+    }
 
-		@include media(md) {
-			font-size: 1.6rem !important;
-		}
+    @include media(md) {
+      font-size: 1.6rem !important;
+    }
 
-		@include media(lg) {
-			font-size: 1.8rem !important;
-		}
+    @include media(lg) {
+      font-size: 1.8rem !important;
+    }
 
-		@include btn-outline();
+    @include btn-outline();
 
-		img {
-			width: 70px;
-			height: 35px;
-			margin-top: 5px;
-			object-fit: contain;
-
-
-		}
-	}
+    img {
+      width: 70px;
+      height: 35px;
+      margin-top: 5px;
+      object-fit: contain;
+    }
+  }
 }
 
 .AreaSaibamais {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 
-	.btnSaibaMais {
-		@include btn-outline();
-		border: none;
-		cursor: pointer;
-	}
+  .btnSaibaMais {
+    @include btn-outline();
+    border: none;
+    cursor: pointer;
+  }
 }
 
-
 .areaBtnCompra {
+  @include flex-center();
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 35px;
 
-	@include flex-center();
-	gap: 20px;
-	flex-direction: column;
-	align-items: center;
-	margin-top: 35px;
+  @include media(md) {
+    margin-top: 0;
+    flex-direction: row;
+  }
 
-	@include media(md) {
-		margin-top: 0;
-		flex-direction: row
-	}
+  a {
+    @include btn-outline();
+    cursor: pointer;
+  }
 
-	a {
-		@include btn-outline();
-		cursor: pointer;
-	}
-
-	button {
-		@include btn-outline();
-		cursor: pointer;
-		display: flex;
-		gap: 10px;
-		align-items: center;
-		img{
-			max-width: 100px;
-		}
-	}
-
+  button {
+    @include btn-outline();
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    img {
+      max-width: 100px;
+    }
+  }
 }
 
 .areaPoster {
-	color: $primary-lingh-color;
-	margin-top: 40px;
+  color: $primary-lingh-color;
+  margin-top: 40px;
 
-	@include media(lg) {
-		display: grid;
-		grid-template-columns: 2fr .7fr;
-		gap: 20px;
-		justify-content: space-between;
-		// padding: 90px 0;
-	}
+  @include media(lg) {
+    display: grid;
+    grid-template-columns: 2fr 0.7fr;
+    gap: 20px;
+    justify-content: space-between;
+    // padding: 90px 0;
+  }
 
-	h2 {
-		font-size: 3.1rem;
-		margin: 25px 0;
-		font-weight: 400;
-	}
+  h2 {
+    font-size: 3.1rem;
+    margin: 25px 0;
+    font-weight: 400;
+  }
 
-	p,
-	li,
-	strong {
-		font-size: 1.6rem;
-		line-height: 2.6rem;
-	}
+  p,
+  li,
+  strong {
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+  }
 
-	.areaFlexPoster {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 20px;
+  .areaFlexPoster {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 
-		@include media(md) {
-			flex-direction: row;
-		}
+    @include media(md) {
+      flex-direction: row;
+    }
 
-		img {
-			width: 100%;
-			max-width: 220px;
-			object-position: top;
-			object-fit: contain;
-		}
+    img {
+      width: 100%;
+      max-width: 220px;
+      object-position: top;
+      object-fit: contain;
+    }
 
-		p {
-			max-width: 450px;
-		}
+    p {
+      max-width: 450px;
+    }
+  }
 
-	}
+  .areaFlexInformacoes {
+    @include media(md) {
+      display: flex;
+      gap: 40px;
+    }
 
-	.areaFlexInformacoes {
-		@include media(md) {
-			display: flex;
-			gap: 40px;
-		}
+    .areaClassificaçãoIndicativa {
+      display: flex;
+      align-items: center;
+      gap: 20px;
 
-		.areaClassificaçãoIndicativa {
-			display: flex;
-			align-items: center;
-			gap: 20px;
+      span {
+        padding: 10px;
+        font-size: 1.8rem;
+        border-radius: 5px;
+        font-weight: 700;
+      }
 
-			span {
-				padding: 10px;
-				font-size: 1.8rem;
-				border-radius: 5px;
-				font-weight: 700;
-			}
+      p {
+        font-size: 1.4rem;
+        font-weight: 400;
+      }
+    }
 
-			p {
-				font-size: 1.4rem;
-				font-weight: 400;
-			}
+    .areainformacaoFilme {
+      margin-top: 30px;
 
-		}
-
-		.areainformacaoFilme {
-			margin-top: 30px;
-
-			li {
-				strong {
-					margin-right: 5px;
-				}
-			}
-		}
-	}
-
+      li {
+        strong {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
 }
 
 .AreaLinksSociais {
-	display: flex;
-	align-items: center;
-	margin: 35px 0;
-	gap: 20px;
+  display: flex;
+  align-items: center;
+  margin: 35px 0;
+  gap: 20px;
 
-	@include media(lg) {
-		flex-direction: row;
-		gap: 15px;
-		margin: 0;
-		padding: 20px 0;
+  @include media(lg) {
+    flex-direction: row;
+    gap: 15px;
+    margin: 0;
+    padding: 20px 0;
+  }
 
-	}
+  .instagram {
+    @include btn-outline;
+    padding: 5px !important;
+    border-radius: 10px !important;
 
-	.instagram {
-		@include btn-outline;
-		padding: 5px !important;
-		border-radius: 10px !important;
+    @include media(lg) {
+      display: flex;
+      gap: 40px;
+    }
 
-		@include media(lg) {
-			display: flex;
-			gap: 40px;
-		}
+    svg {
+      font-size: 2rem;
+    }
+  }
 
-		svg {
-			font-size: 2rem;
-		}
-	}
+  .areaAssitirTrailer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: $primary-lingh-color;
+    padding: 7px 10px;
+    border-radius: 10px;
 
-	.areaAssitirTrailer {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		background-color: $primary-lingh-color;
-		padding: 7px 10px;
-		border-radius: 10px;
+    @include media(xl) {
+      margin: 0;
+    }
 
-		@include media(xl) {
-			margin: 0;
-		}
+    svg {
+      color: #e52d27;
+      font-size: 2rem;
+    }
 
-		svg {
-			color: #E52D27;
-			font-size: 2rem;
-		}
-
-		span {
-			font-size: 1.4rem;
-			color: $primary-dark-color;
-			font-weight: 700;
-		}
-	}
+    span {
+      font-size: 1.4rem;
+      color: $primary-dark-color;
+      font-weight: 700;
+    }
+  }
 }
 
 .areaSlide {
-	overflow: visible !important;
+  overflow: visible !important;
 
-	.swiper-scrollbar {
-		opacity: 1 !important;
-		background-color: #fff !important;
+  .swiper-scrollbar {
+    opacity: 1 !important;
+    background-color: #fff !important;
 
-		touch-action: manipulation !important;
-	}
+    touch-action: manipulation !important;
+  }
 
-	.overflow-slide {
-		overflow: hidden;
-	}
+  .overflow-slide {
+    overflow: hidden;
+  }
 }
 
 .slideTitle {
-	font-size: 3.1rem;
-	margin: 40px 0 40px 0;
-	font-weight: 400;
-	color: $primary-lingh-color;
+  font-size: 3.1rem;
+  margin: 40px 0 40px 0;
+  font-weight: 400;
+  color: $primary-lingh-color;
 }
 
 .modalImageFilme {
-	max-width: initial !important;
+  max-width: initial !important;
 }
 
 .modalSlideImg {
-	width: 100%;
-	max-height: 450px;
+  width: 100%;
+  max-height: 450px;
 
-	@include media(xxl){
-		max-height: 750px;
-	}
-	padding: 0 30px;
+  @include media(xxl) {
+    max-height: 750px;
+  }
+  padding: 0 30px;
 }
 
 .areaIframeVideoYoutube {
-	overflow: visible;
+  overflow: visible;
 
-	.gridIframeVideoYoutube {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 20px;
-		max-width: 600px;
-		overflow-x: auto;
-		touch-action: pan-y;
+  .gridIframeVideoYoutube {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 600px;
+    overflow-x: auto;
+    touch-action: pan-y;
 
-		@include media(lg) {
-			max-width: initial;
-		}
+    @include media(lg) {
+      max-width: initial;
+    }
 
-		&::-webkit-scrollbar {
-			width: 120px;
+    &::-webkit-scrollbar {
+      width: 120px;
+    }
 
-		}
+    .iframeVideoYoutube {
+      @include media(lg) {
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 30px;
+        height: 0;
+      }
 
-		.iframeVideoYoutube {
-			@include media(lg) {
-				position: relative;
-				padding-bottom: 56.25%;
-				padding-top: 30px;
-				height: 0;
-			}
+      :before {
+        content: '';
+        padding-top: 56.25%;
+      }
 
-			:before {
-				content: '';
-				padding-top: 56.25%;
-			}
-
-			.embedResponsiveItem {
-				@include media(lg) {
-					position: absolute;
-					top: 0;
-					left: 0;
-					width: 100%;
-					height: 100%;
-				}
-
-			}
-		}
-	}
+      .embedResponsiveItem {
+        @include media(lg) {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
 }
 
 .ModaliframeVideoYoutube {
-	max-width: 980px !important;
+  max-width: 980px !important;
 
-	.iframeVideoYoutube {
-		.embedResponsiveItem {
-			@include media(sm) {
-				width: 500px;
-				height: 400px;
-			}
+  .iframeVideoYoutube {
+    .embedResponsiveItem {
+      @include media(sm) {
+        width: 500px;
+        height: 400px;
+      }
 
-			@include media(xl) {
-				width: 900px;
-				height: 500px;
-			}
-		}
-	}
+      @include media(xl) {
+        width: 900px;
+        height: 500px;
+      }
+    }
+  }
 }
 
-
 .areaBanner {
-	position: relative;
-	height: auto;
-	overflow: hidden;
-	background-size: cover;
-	background-position: center;
-	width: 100%;
-	height: 540px;
-	@include media(lg) {
-		height: 540px;
-	}
+  position: relative;
+  height: auto;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 540px;
+  @include media(lg) {
+    height: 540px;
+  }
 
-	@include media(xxl){
-		background-repeat: no-repeat;
-		background-size: contain;
-		background-position: top;
-	}
+  @include media(xxl) {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
+  }
 
-	&::before {
-		content: '';
-		position: absolute;
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0) 82%, rgba(0, 0, 0, 1) 100%);
-		width: 100%;
-		height: 100%;
-		bottom: 0px;
+  &::before {
+    content: '';
+    position: absolute;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 82%,
+      rgba(0, 0, 0, 1) 100%
+    );
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+  }
 
-	}
+  img {
+    width: 1920px;
+    max-width: 100%;
+    margin: 0 auto;
+    touch-action: none;
+    display: block;
+  }
 
-	img {
-		width: 1920px;
-		max-width: 100%;
-		margin: 0 auto;
-		touch-action: none;
-		display: block;
+  .bannerFilme {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 999;
 
-	}
+    .areaTituloBanner {
+      h1 {
+        text-shadow:
+          -5px 3px 15px #222222,
+          3px -1px 15px #222222;
+      }
+      // @include media(lg) {
+      // 	display: flex;
+      // 	justify-content: space-between;
+      // }
+      .subTitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        @include media(lg) {
+          flex-direction: row;
+          // padding-bottom: 35px;
+        }
 
-	.bannerFilme {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		margin: 0 auto;
-		z-index: 999;
+        .emExibicao {
+          padding: 5px 25px 10px;
+          font-size: 1.6rem;
+          color: $primary-lingh-color;
+          font-weight: 400;
+          text-align: center;
+          text-transform: uppercase;
 
-		.areaTituloBanner {
-			h1{
-				text-shadow: -5px 3px 15px #222222, 3px -1px 15px #222222;
-			}
-			// @include media(lg) {
-			// 	display: flex;
-			// 	justify-content: space-between;
-			// }
-			.subTitle {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				flex-direction: column;
-				@include media(lg) {
-					flex-direction: row;
-					// padding-bottom: 35px;
-				}
+          @include media(lg) {
+            font-size: 2.2rem;
+            text-align: left;
+            padding: 0;
+          }
 
-				.emExibicao {
-					padding: 5px 25px 10px;
-					font-size: 1.6rem;
-					color: $primary-lingh-color;
-					font-weight: 400;
-					text-align: center;
-					text-transform: uppercase;
+          strong {
+            display: block;
+            font-weight: 700;
+          }
+        }
+      }
 
-					@include media(lg) {
-						font-size: 2.2rem;
-						text-align: left;
-						padding: 0;
-					}
+      h1 {
+        color: $primary-lingh-color;
+        text-align: center;
+        font-size: 3.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        padding: 25px;
+        margin: 0;
 
-					strong {
-						display: block;
-						font-weight: 700;
-					}
-				}
-			}
-
-
-			h1 {
-				color: $primary-lingh-color;
-				text-align: center;
-				font-size: 3.5rem;
-				text-transform: uppercase;
-				font-weight: 700;
-				padding: 25px;
-				margin: 0;
-
-				@include media(lg) {
-					text-align: left;
-					font-size: 5.5rem;
-					padding: 0px;
-				}
-			}
-
-		}
-	}
-
+        @include media(lg) {
+          text-align: left;
+          font-size: 5.5rem;
+          padding: 0px;
+        }
+      }
+    }
+  }
 }
 
 .SlideImgFilme {
-	width: 100%;
-	height: 160px;
-	object-fit: cover;
-	object-position: center center;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .filmeSaibaMais {
-	opacity: 0;
-	animation: scale-up-ver-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) forwards;
+  opacity: 0;
+  animation: scale-up-ver-top 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
 }
 
 @keyframes scale-up-ver-top {
-	0% {
-		transform: scaleY(0.4);
-		transform-origin: 100% 0%;
-	}
+  0% {
+    transform: scaleY(0.4);
+    transform-origin: 100% 0%;
+  }
 
-	100% {
-		opacity: 1;
-		transform: scaleY(1);
-		transform-origin: 100% 0%;
-	}
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: 100% 0%;
+  }
 }
 
 .areaNewsletter {
-	margin-top: 35px;
-	margin-bottom: 35px;
-  @include media(lg){
+  margin-top: 35px;
+  margin-bottom: 35px;
+  @include media(lg) {
     padding: 0;
     margin-bottom: 90px;
   }
 }
 
 .combrarIngresso {
-	h2{
-		margin-bottom: 0 !important;
-	}
-	p {
-		color: $primary-lingh-color;
-		font-size: 1.6rem;
-		line-height: 2.6rem;
-		margin: 20px 0;
-	}
+  h2 {
+    margin-bottom: 0 !important;
+  }
+  p {
+    color: $primary-lingh-color;
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+    margin: 20px 0;
+  }
 }
 
-.btnSlideImagem{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	position: absolute;
-	width: 100%;
-	left: 0;
-	top: 0;
-	height: 100%;
-	z-index: -1;
-	
-	button{
-		background-color: transparent;
-		color: $primary-lingh-color;
-		border: none;
-		font-size: 5.4rem;
-		cursor: pointer;
-	}
+.btnSlideImagem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: -1;
+
+  button {
+    background-color: transparent;
+    color: $primary-lingh-color;
+    border: none;
+    font-size: 5.4rem;
+    cursor: pointer;
+  }
 }
 
+.FilmesPersonalizados {
+  p {
+    color: $primary-lingh-color;
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+  }
+  .btn {
+    margin-top: 45px;
+    a {
+      @include btn-outline();
+    }
+  }
 
-.FilmesPersonalizados{
-	p {
-		color: $primary-lingh-color;
-		font-size: 1.6rem;
-		line-height: 2.6rem;
-	}
-	.btn{
-		margin-top: 45px;
-		a{
-			@include btn-outline();
-		}
-	}
-
-	ul{
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		margin-bottom: 35px;
-		li a{
-			padding: 8px 15px 0px 15px;
-			@include btn-outline();
-		}
-	}
-	
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 35px;
+    li a {
+      padding: 8px 15px 0px 15px;
+      @include btn-outline();
+    }
+  }
 }
