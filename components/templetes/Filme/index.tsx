@@ -400,7 +400,7 @@ const Filme = (data: IFilmeProps) => {
                 </section>
               )}
 
-              {filme.videos.length != 0 && (
+              {filme.images.length != 0 && (
                 <Slide.Title className={Style.slideTitle}>Vídeos</Slide.Title>
               )}
               <section className={Style.areaIframeVideoYoutube}>
