@@ -3,7 +3,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useLayoutEffect, useState } from 'react'
-import { FaInstagram, FaYoutube } from 'react-icons/fa'
+import { FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
@@ -20,6 +20,7 @@ import { IFilmeResponse, IFilmeResponseUrl } from '@/utils/server/types'
 import { SwiperOptions } from 'swiper/types'
 
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import { FaXTwitter } from 'react-icons/fa6'
 interface IFilmeProps {
   movie: {
     movie: IFilmeResponse
@@ -41,6 +42,26 @@ const classificacoesIndicativas = [
   { idade: '18', cor: '#161616' }
 ]
 
+const swiperOptions: SwiperOptions = {
+  slidesPerView: 2,
+  spaceBetween: 10,
+  freeMode: true,
+  pagination: {
+    clickable: true
+  },
+  scrollbar: { hide: true },
+  modules: [FreeMode, Scrollbar],
+  breakpoints: {
+    640: {
+      slidesPerView: 3,
+      spaceBetween: 20
+    },
+    768: {
+      slidesPerView: 4,
+      spaceBetween: 10
+    }
+  }
+}
 function setDefinirCorClassificacaoIndicativa(idade: string) {
   const classificacao = classificacoesIndicativas.find(
     (classificacao) => classificacao.idade === idade
@@ -65,7 +86,10 @@ const Filme = (data: IFilmeProps) => {
     formatPassouUmaSemanaDesdeData,
     formatfaltaUmaSemanaParaDataMarcada
   } = useFormatarData()
-
+  const { formatarData } = useFormatarData()
+  const { dataLayerFichafilme, dataLayerPlayTrailer, dataLayerMovieStream } =
+    useGtag()
+  const { isMobile, isLoading } = useIsMobile()
   const [imageIndex, setImageIndex] = useState<number>(0)
   const [open, setOpen] = useState<boolean>(false)
   const [iframe, setIframe] = useState<string>()
@@ -86,16 +110,11 @@ const Filme = (data: IFilmeProps) => {
     )
   }
 
-  const { isMobile, isLoading } = useIsMobile()
   //const formatarData = useFormatarData()
   const emExibicao =
     formatMesmaSemana(filme?.releasedate) ||
     formatPassouUmaSemanaDesdeData(filme?.releasedate) ||
     filme?.hasSession
-
-  const { formatarData } = useFormatarData()
-  const { dataLayerFichafilme, dataLayerPlayTrailer, dataLayerMovieStream } =
-    useGtag()
 
   const router = useRouter()
   useLayoutEffect(() => {
@@ -121,79 +140,9 @@ const Filme = (data: IFilmeProps) => {
     setIframe(data)
   }
 
-  const swiperOptions: SwiperOptions = {
-    slidesPerView: 2,
-    spaceBetween: 10,
-    freeMode: true,
-    pagination: {
-      clickable: true
-    },
-    scrollbar: { hide: true },
-    modules: [FreeMode, Scrollbar],
-    breakpoints: {
-      640: {
-        slidesPerView: 3,
-        spaceBetween: 20
-      },
-      768: {
-        slidesPerView: 4,
-        spaceBetween: 10
-      }
-    }
-  }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const swiperOptionsVideo: SwiperOptions = {
-    slidesPerView: 1,
-    spaceBetween: 10,
-    freeMode: true,
-    grabCursor: true,
-    // pagination: {
-    //   clickable: true
-    // },
-    pagination: false,
-    scrollbar: { hide: true },
-    modules: [FreeMode, Scrollbar],
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 20
-      }
-    }
-  }
-
-  const Links = ({ youtube, insta }: { youtube: string; insta: string }) => {
-    return (
-      <div className={Style.AreaLinksSociais}>
-        {!!insta && (
-          <a
-            className={Style.instagram}
-            href={insta}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaInstagram />
-          </a>
-        )}
-        {!!youtube && (
-          <span
-            className={Style.areaAssitirTrailer}
-            onClick={() => handleVerVideo(youtube)}
-          >
-            <FaYoutube />
-            <span>ASSISTA AO TRAILER</span>
-          </span>
-        )}
-      </div>
-    )
-  }
-  const setColor = (slug: string) => {
-    const colorTitle = ['guerracivil']
-    const color = colorTitle.includes(slug)
-    return color ? '#01fc30' : filme.color
-  }
-
   if (isLoading) return <Loading altura={true} />
 
+  const isFilmeFeparaoimpossivel = filme.title == 'Fé Para o Impossível'
   return (
     <>
       <section
@@ -205,12 +154,13 @@ const Filme = (data: IFilmeProps) => {
         <div className={Style.bannerFilme}>
           <div className="container">
             <div className={Style.areaTituloBanner}>
-              <h1 style={{ color: `${setColor(filme.slug)}` }}>
-                {filme?.title}
-              </h1>
+              <h1 style={{ color: filme.slug }}>{filme?.title}</h1>
               <div className={Style.subTitle}>
                 <h2 className={Style.emExibicao}>
-                  {filme.title == 'Fé Para o Impossível' && filme.releasedate == "0000-00-00" ? 'Fevereiro nos Cinemas' : formatarData(filme.releasedate)}
+                  {filme.title == 'Fé Para o Impossível' &&
+                  filme.releasedate == '0000-00-00'
+                    ? 'Fevereiro nos Cinemas'
+                    : formatarData(filme.releasedate)}
                 </h2>
                 <div className={Style.areaBtnCompra}>
                   {!isStreaming && emExibicao && !isMobile && (
@@ -321,10 +271,19 @@ const Filme = (data: IFilmeProps) => {
                   <div>
                     <h2>Sinopse</h2>
                     <p>{filme?.shortSynopsis}</p>
-                    <Links youtube={filme?.trailer} insta=""></Links>
+                    {filme?.trailer === '' && (
+                      <div className={Style.AreaLinksSociais}>
+                        <span
+                          className={Style.areaAssitirTrailer}
+                          onClick={() => handleVerVideo(filme?.trailer)}
+                        >
+                          <FaYoutube />
+                          <span>ASSISTA AO TRAILER</span>
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
-
                 <div className={Style.areaFlexInformacoes}>
                   <div>
                     <h2>Informações</h2>
@@ -370,7 +329,80 @@ const Filme = (data: IFilmeProps) => {
                   </div>
                 </div>
               </div>
-              <Slide.Title className={Style.slideTitle}>Vídeos</Slide.Title>
+              {isFilmeFeparaoimpossivel && (
+                <section className={Style.FilmesPersonalizados}>
+                  <Slide.Title className={Style.slideTitle}>
+                    Galeria
+                  </Slide.Title>
+                  <p>
+                    Materiais do Filme: Para baixar os materiais oficiais do
+                    filme Fé Para O Impossível, clique no botão abaixo. (Esse
+                    link será adicionado com os materiais já divulgados, como
+                    trailer, artes para telão, posts, etc.)
+                  </p>
+                  <div className={Style.btn}>
+                    <a
+                      target="_blank"
+                      href="https://drive.google.com/drive/folders/1aKhUfjRqC8ZoeN6SxI2hm6gt1iQ0SBjq?usp=sharing"
+                      rel="noreferrer"
+                    >
+                      Baixar
+                    </a>
+                  </div>
+
+                  <Slide.Title className={Style.slideTitle}>
+                    Ingressos em Grupo
+                  </Slide.Title>
+                  <p>
+                    Ingressos em Grupo: Vai assistir em grupo? Preencha o
+                    formulário se tiver interesse em comprar ingressos para
+                    grupos de 20 pessoas ou mais.
+                  </p>
+                  <div className={Style.btn}>
+                    <a
+                      target="_blank"
+                      href="https://forms.gle/ZEYz46xXXfEjZSet6"
+                      rel="noreferrer"
+                    >
+                      Baixar
+                    </a>
+                  </div>
+
+                  <Slide.Title className={Style.slideTitle}>
+                    Redes Sociais
+                  </Slide.Title>
+                  <ul>
+                    <li>
+                      <a
+                        href="https://www.instagram.com/feparaoimpossivel/"
+                        aria-label="Instagram"
+                      >
+                        <FaInstagram />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://x.com/feproimpossivel"
+                        aria-label="X (Twitter)"
+                      >
+                        <FaXTwitter />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.tiktok.com/@feparaoimpossivel"
+                        aria-label="Tiktok"
+                      >
+                        <FaTiktok />
+                      </a>
+                    </li>
+                  </ul>
+                </section>
+              )}
+
+              {filme.videos.length != 0 && (
+                <Slide.Title className={Style.slideTitle}>Vídeos</Slide.Title>
+              )}
               <section className={Style.areaIframeVideoYoutube}>
                 <section className={Style.gridIframeVideoYoutube}>
                   {filme?.videos?.map((data) => (
@@ -401,7 +433,10 @@ const Filme = (data: IFilmeProps) => {
                 </section>
               </section>
 
-              <Slide.Title className={Style.slideTitle}>Galeria</Slide.Title>
+              {filme.videos.length != 0 && (
+                <Slide.Title className={Style.slideTitle}>Galeria</Slide.Title>
+              )}
+
               <Slide.Content
                 swiperOptions={swiperOptions}
                 className={Style.areaSlide}

@@ -500,3 +500,30 @@
 		cursor: pointer;
 	}
 }
+
+
+.FilmesPersonalizados{
+	p {
+		color: $primary-lingh-color;
+		font-size: 1.6rem;
+		line-height: 2.6rem;
+	}
+	.btn{
+		margin-top: 45px;
+		a{
+			@include btn-outline();
+		}
+	}
+
+	ul{
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 35px;
+		li a{
+			padding: 8px 15px 0px 15px;
+			@include btn-outline();
+		}
+	}
+	
+}
