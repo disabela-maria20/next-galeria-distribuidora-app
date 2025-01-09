@@ -335,10 +335,10 @@ const Filme = (data: IFilmeProps) => {
                     Galeria
                   </Slide.Title>
                   <p>
-                    Materiais do Filme: Para baixar os materiais oficiais do
-                    filme Fé Para O Impossível, clique no botão abaixo. (Esse
-                    link será adicionado com os materiais já divulgados, como
-                    trailer, artes para telão, posts, etc.)
+                    Para baixar os materiais oficiais do filme Fé Para O
+                    Impossível, clique no botão abaixo. (Esse link será
+                    adicionado com os materiais já divulgados, como trailer,
+                    artes para telão, posts, etc.)
                   </p>
                   <div className={Style.btn}>
                     <a
@@ -354,9 +354,9 @@ const Filme = (data: IFilmeProps) => {
                     Ingressos em Grupo
                   </Slide.Title>
                   <p>
-                    Ingressos em Grupo: Vai assistir em grupo? Preencha o
-                    formulário se tiver interesse em comprar ingressos para
-                    grupos de 20 pessoas ou mais.
+                    Vai assistir em grupo? Preencha o formulário se tiver
+                    interesse em comprar ingressos para grupos de 20 pessoas ou
+                    mais.
                   </p>
                   <div className={Style.btn}>
                     <a
