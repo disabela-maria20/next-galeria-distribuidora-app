@@ -332,7 +332,7 @@ const Filme = (data: IFilmeProps) => {
               {isFilmeFeparaoimpossivel && (
                 <section className={Style.FilmesPersonalizados}>
                   <Slide.Title className={Style.slideTitle}>
-                    Galeria
+                    Materiais do Filme
                   </Slide.Title>
                   <p>
                     Para baixar os materiais oficiais do filme Fé Para O
