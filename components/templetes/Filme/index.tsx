@@ -398,7 +398,7 @@ const Filme = (data: IFilmeProps) => {
                 </section>
               )}
 
-              {filme.images.length != 0 && (
+              {filme.videos.length !== 0 && (
                 <Slide.Title className={Style.slideTitle}>Vídeos</Slide.Title>
               )}
               <section className={Style.areaIframeVideoYoutube}>
@@ -431,7 +431,7 @@ const Filme = (data: IFilmeProps) => {
                 </section>
               </section>
 
-              {filme.videos.length != 0 && (
+              {filme.images.length != 0 && (
                 <Slide.Title className={Style.slideTitle}>Galeria</Slide.Title>
               )}
 
