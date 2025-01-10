@@ -336,9 +336,7 @@ const Filme = (data: IFilmeProps) => {
                   </Slide.Title>
                   <p>
                     Para baixar os materiais oficiais do filme Fé Para O
-                    Impossível, clique no botão abaixo. (Esse link será
-                    adicionado com os materiais já divulgados, como trailer,
-                    artes para telão, posts, etc.)
+                    Impossível, clique no botão abaixo.
                   </p>
                   <div className={Style.btn}>
                     <a
