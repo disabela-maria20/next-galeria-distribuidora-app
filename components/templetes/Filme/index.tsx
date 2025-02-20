@@ -4,6 +4,7 @@
 import { useRouter } from 'next/navigation'
 import { useLayoutEffect, useState } from 'react'
 import { FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
@@ -20,7 +21,6 @@ import { IFilmeResponse, IFilmeResponseUrl } from '@/utils/server/types'
 import { SwiperOptions } from 'swiper/types'
 
 import 'react-lazy-load-image-component/src/effects/blur.css'
-import { FaXTwitter } from 'react-icons/fa6'
 interface IFilmeProps {
   movie: {
     movie: IFilmeResponse
@@ -94,9 +94,9 @@ const Filme = (data: IFilmeProps) => {
   const [open, setOpen] = useState<boolean>(false)
   const [iframe, setIframe] = useState<string>()
   const [openModal, setOpenModal] = useState<boolean>(false)
-  const [saibaMais, setSaibaMais] = useState<boolean>(
-    formatfaltaUmaSemanaParaDataMarcada(filme.releasedate) && filme.hasSession
-  )
+  const [saibaMais, setSaibaMais] = useState<boolean>(filme.hasSession)
+
+  console.log(formatfaltaUmaSemanaParaDataMarcada(filme.releasedate))
 
   const handlePrevImage = () => {
     setImageIndex((prevIndex) =>
