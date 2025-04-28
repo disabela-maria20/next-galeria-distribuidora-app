@@ -81,11 +81,8 @@ const Filme = (data: IFilmeProps) => {
   const filme = data.movie?.movie
   //const streaming = filme.streaming.map((data) => data.platform).join(',')
   const isStreaming = filme.status == EStatus.STREAMING
-  const {
-    formatMesmaSemana,
-    formatPassouUmaSemanaDesdeData,
-    formatfaltaUmaSemanaParaDataMarcada
-  } = useFormatarData()
+  const { formatMesmaSemana, formatPassouUmaSemanaDesdeData } =
+    useFormatarData()
   const { formatarData } = useFormatarData()
   const { dataLayerFichafilme, dataLayerPlayTrailer, dataLayerMovieStream } =
     useGtag()
@@ -95,8 +92,6 @@ const Filme = (data: IFilmeProps) => {
   const [iframe, setIframe] = useState<string>()
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [saibaMais, setSaibaMais] = useState<boolean>(filme.hasSession)
-
-  console.log(formatfaltaUmaSemanaParaDataMarcada(filme.releasedate))
 
   const handlePrevImage = () => {
     setImageIndex((prevIndex) =>

@@ -49,6 +49,7 @@ const SobreNos = ({ listaFilmes }: ISobreNosProps) => {
     setOpen(true)
     setIframe(data)
   }
+
   if (isLoading) return <Loading altura={true} />
   return (
     <section className={Style.SobreNos}>

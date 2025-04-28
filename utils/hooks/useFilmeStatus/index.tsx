@@ -47,19 +47,12 @@ export const useFilmeStatus = (
     if (!parsedStatus || !statusCorrecoes[parsedStatus]) return ''
 
     const statusCorrigido = statusCorrecoes[parsedStatus]
+
     const today = new Date()
 
     const releaseDate = new Date(data.releasedate)
     const dia = String(releaseDate.getDate()).padStart(2, '0')
     const mes = String(releaseDate.getMonth() + 1).padStart(2, '0')
-
-    if (
-      statusCorrigido === 'Lançamento' &&
-      data.title == 'Fé Para o Impossível' &&
-      data.releasedate == '0000-00-00'
-    ) {
-      return 'Fevereiro nos Cinemas'
-    }
 
     if (
       (formatDateToYYYYMMDD(today) === data.releasedate &&
@@ -77,11 +70,11 @@ export const useFilmeStatus = (
     }
 
     if (statusCorrigido === 'Lançamento' && data.streaming.length === 0) {
-      return `${dia}/${mes} nos cinemas`
+      return `${Number(dia) + 1}/${mes} nos cinemas`
     }
 
     if (data.streaming.length > 0 && statusCorrigido === 'Lançamento') {
-      return `${dia}/${mes} na ${data.streaming[0].platform}`
+      return `${Number(dia)}/${mes} na ${data.streaming[0].platform}`
     }
 
     return statusCorrigido
