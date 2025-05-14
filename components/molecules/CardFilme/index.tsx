@@ -196,7 +196,9 @@ const CardFilme = ({
                 />
                 <span
                   className={Style.status}
-                  style={{ background: `${data.color_status}` }}
+                  style={{
+                    background: `${data.color_status != '' ? data.color_status : '#000'}`
+                  }}
                 >
                   {useFilmeStatus(data.status, data)}
                 </span>
@@ -214,9 +216,11 @@ const CardFilme = ({
           <img src={data?.cover} alt={data?.title} width={300} height={200} />
           <span
             className={Style.status}
-            style={{ background: `${data?.color_status}` }}
+            style={{
+              background: `${data.color_status != '' ? data.color_status : '#000'}`
+            }}
           >
-            {useFilmeStatus(data?.status, data)}
+            {useFilmeStatus(data.status, data)}
           </span>
         </Link>
         <h3>{data?.title}</h3>
