@@ -138,6 +138,17 @@ const Filme = (data: IFilmeProps) => {
   if (isLoading) return <Loading altura={true} />
 
   const isFilmeFeparaoimpossivel = filme.title == 'Fé Para o Impossível'
+
+  const deParaPlataformas: Record<string, string> = {
+    amazonprimevideo: 'https://www.primevideo.com/',
+    netflix: 'https://www.netflix.com/'
+  }
+
+  const plataforma = filme.streaming[0]?.platform.toLowerCase()
+  const nomeImagem = plataforma.toLowerCase().replace(/\s+/g, '')
+
+  const urlDestino = deParaPlataformas[nomeImagem] || '#'
+
   return (
     <>
       <section
@@ -178,16 +189,19 @@ const Filme = (data: IFilmeProps) => {
                           filme.streaming.toString(),
                           Number(filme.idVibezzMovie)
                         )
-                        window.location.href = ' https://www.primevideo.com/'
+                        window.location.href = urlDestino
                       }}
                     >
                       ASSISTA AGORA NO
-                      <LazyLoadImage
-                        src={`/img/streaming/${'amazonprime'}.png`}
-                        // alt={service.toLowerCase()}
-                        width="100"
-                        effect="blur"
-                      />
+                      {filme.streaming.map((data) => (
+                        <LazyLoadImage
+                          key={data.platform}
+                          src={`/img/streaming/${nomeImagem}.png`}
+                          // alt={service.toLowerCase()}
+                          width="100"
+                          effect="blur"
+                        />
+                      ))}
                     </button>
                   )}
                 </div>
@@ -244,12 +258,15 @@ const Filme = (data: IFilmeProps) => {
               }}
             >
               ASSISTA AGORA NO
-              <LazyLoadImage
-                src={`/img/streaming/${'amazonprime'}.png`}
-                // alt={service.toLowerCase()}
-                width="100"
-                effect="blur"
-              />
+              {filme.streaming.map((data) => (
+                <LazyLoadImage
+                  key={data.platform}
+                  src={`/img/streaming/${data.platform}.png`}
+                  // alt={service.toLowerCase()}
+                  width="100"
+                  effect="blur"
+                />
+              ))}
             </button>
           )}
 
