@@ -144,9 +144,8 @@ const Filme = (data: IFilmeProps) => {
     netflix: 'https://www.netflix.com/'
   }
 
-  const plataforma = filme.streaming[0]?.platform.toLowerCase()
-  const nomeImagem = plataforma.toLowerCase().replace(/\s+/g, '')
-
+  const plataforma = filme.streaming[0]?.platform?.toLowerCase() ?? ''
+  const nomeImagem = plataforma.replace(/\s+/g, '')
   const urlDestino = deParaPlataformas[nomeImagem] || '#'
 
   return (
