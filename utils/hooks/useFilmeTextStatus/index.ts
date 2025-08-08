@@ -16,7 +16,7 @@ const useFilmeTextStatus = () => {
     )
       return 'Em pré-venda'
     if (filmeLista.streaming.length > 0) return 'Em streaming'
-    if (filmeLista.hasSession) return 'Hoje nos cinemas'
+    if (filmeLista.hasSession) return 'Hoje, somente nos cinemas'
     if (
       filmeLista.hasSession == false &&
       new Date(filmeLista.releasedate) < new Date()

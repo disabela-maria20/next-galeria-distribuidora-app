@@ -21,6 +21,7 @@ import { IFilmeResponse, IFilmeResponseUrl } from '@/utils/server/types'
 import { SwiperOptions } from 'swiper/types'
 
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import useFilmeTextStatus from '@/utils/hooks/useFilmeTextStatus'
 interface IFilmeProps {
   movie: {
     movie: IFilmeResponse
@@ -79,6 +80,7 @@ function converterParaHorasEMinutos(totalMinutos: number) {
 
 const Filme = (data: IFilmeProps) => {
   const filme = data.movie?.movie
+  const statusTextData = useFilmeTextStatus()
   //const streaming = filme.streaming.map((data) => data.platform).join(',')
   const isStreaming = filme.status == EStatus.STREAMING
   const { formatMesmaSemana, formatPassouUmaSemanaDesdeData } =
@@ -162,10 +164,7 @@ const Filme = (data: IFilmeProps) => {
               <h1 style={{ color: filme.slug }}>{filme?.title}</h1>
               <div className={Style.subTitle}>
                 <h2 className={Style.emExibicao}>
-                  {filme.title == 'Fé Para o Impossível' &&
-                  filme.releasedate == '0000-00-00'
-                    ? 'Fevereiro nos Cinemas'
-                    : formatarData(filme.releasedate)}
+                  {statusTextData(filme ?? '')}
                 </h2>
                 <div className={Style.areaBtnCompra}>
                   {!isStreaming && emExibicao && !isMobile && (
