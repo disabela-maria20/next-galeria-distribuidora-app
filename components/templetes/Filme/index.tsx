@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client'
 
@@ -14,6 +15,7 @@ import { FreeMode, Scrollbar } from 'swiper/modules'
 import { Loading } from '@/components/atoms'
 import { Model, Newsletter, Slide } from '@/components/molecules'
 import { Sessoes } from '@/components/organisms'
+import useFilmeTextStatus from '@/utils/hooks/useFilmeTextStatus'
 import { useFormatarData } from '@/utils/hooks/useFormatarData/formatarData'
 import useIsMobile from '@/utils/hooks/useIsMobile/isMobile'
 import { useGtag } from '@/utils/lib/gtag'
@@ -21,7 +23,6 @@ import { IFilmeResponse, IFilmeResponseUrl } from '@/utils/server/types'
 import { SwiperOptions } from 'swiper/types'
 
 import 'react-lazy-load-image-component/src/effects/blur.css'
-import useFilmeTextStatus from '@/utils/hooks/useFilmeTextStatus'
 interface IFilmeProps {
   movie: {
     movie: IFilmeResponse
@@ -327,6 +328,11 @@ const Filme = (data: IFilmeProps) => {
                         <strong>Elenco:</strong>
                         {filme?.cast}
                       </li>
+
+                      <li>
+                        <strong>Elenco:</strong>
+                        {filme?.cast}
+                      </li>
                       <li>
                         <strong>Direção:</strong>
                         {filme?.director}
@@ -501,10 +507,10 @@ const Filme = (data: IFilmeProps) => {
                   height={500}
                 />
                 <div className={Style.btnSlideImagem}>
-                  <button onClick={handlePrevImage}>
+                  <button onClick={handlePrevImage} title="Previous Image">
                     <FiChevronLeft />
                   </button>
-                  <button onClick={handleNextImage}>
+                  <button onClick={handleNextImage} title="Previous Image">
                     <FiChevronRight />
                   </button>
                 </div>

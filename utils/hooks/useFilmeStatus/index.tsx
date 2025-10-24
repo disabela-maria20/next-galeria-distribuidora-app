@@ -18,7 +18,7 @@ const statusCorrecoes: Record<Status, string> = {
   [Status.INATIVO]: 'Inativo',
   [Status.PRODUCAO]: 'Produção',
   [Status.POSPRODUCAO]: 'Pós-Produção',
-  [Status.EMBREVE]: 'Em Breve',
+  [Status.EMBREVE]: 'Em Breve nos Cinemas',
   [Status.STREAMINGEMBREVE]: 'Em breve em Streaming'
 }
 

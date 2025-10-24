@@ -111,8 +111,8 @@ const ComprarIngresso = ({ banner, listaFilmes }: IComprarIngressoProps) => {
           <h1>
             EM EXIBIÇÃO
             <span>
-              Confira os horários das sessões dos filmes da Diamond em exibição
-              nos cinemas e garanta seus ingressos.
+              Confira os horários das sessões dos filmes da Galeria
+              Distribuidora em exibição nos cinemas e garanta seus ingressos.
             </span>
           </h1>
           {filmesComSessoes.length === 0 && !loading && (
